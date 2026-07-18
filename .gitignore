@@ -1,0 +1,30 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# SQLite database files
+*.sqlite
+*.sqlite3
+*.db
+database/data/*
+!database/data/.gitkeep
+
+# Dependencies
+node_modules/
+vendor/
+.venv/
+venv/
+__pycache__/
+
+# Build output and common caches
+dist/
+build/
+out/
+.next/
+.nuxt/
+coverage/
+.cache/
+tmp/
+*.log
+

@@ -1,0 +1,20 @@
+# Template เท่านั้น: ต้องปรับคำสั่ง build, start และ port หลังเลือก Stack
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "${BACKEND_PORT:-4000}:4000"
+    volumes:
+      - ./database/data:/app/database/data
+
