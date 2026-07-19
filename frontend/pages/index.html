@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DormHub</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header id="navbar">
+        <div class="container nav-container">
+            <div class="logo">DormHub</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search dorms...">
+            </div>
+            <nav>
+                <a href="#" class="active">HOME</a>
+                <a href="#">ALL DORMS</a>
+                <a href="#">MAP</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>Welcome to <span class="accent-text italic">DormHub</span></h1>
+            <p>Premium student housing tailored for the KMITL Chumphon community.<br>Elevate your academic journey with a living experience designed for excellence.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">EXPLORE DORMS</button>
+                <button class="btn btn-outline">BOOK A TOUR</button>
+            </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar-container container">
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label>DORM TYPE</label>
+                    <select>
+                        <option>All Types</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>MONTHLY RATE</label>
+                    <select>
+                        <option>Any Price</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>CAMPUS DISTANCE</label>
+                    <select>
+                        <option>Within 2km</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary search-btn">SEARCH NOW</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dormitory List Section -->
+    <section class="dorms-section container">
+        <div class="section-header">
+            <div>
+                <span class="subtitle">SELECTED COLLECTION</span>
+                <h2>Dormitory for You</h2>
+            </div>
+            <a href="#" class="view-all">VIEW ALL LISTINGS &rarr;</a>
+        </div>
+
+        <div class="dorms-grid">
+            <!-- Card 1 -->
+            <div class="dorm-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&q=80&w=800');">
+                    <span class="tag">MALE ONLY</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-title-row">
+                        <h3>The Ivy Suites</h3>
+                        <div class="price">฿ 8,500<span>/Month</span></div>
+                    </div>
+                    <p class="distance">1.2km from South Gate</p>
+                    <div class="amenities">
+                        <span><span class="dot"></span>HI SPEED</span>
+                        <span><span class="dot"></span>AIR CON</span>
+                        <span><span class="dot"></span>PRIVATE</span>
+                    </div>
+                    <button class="btn btn-outline btn-full">VIEW DETAILS</button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="dorm-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800');">
+                    <span class="tag">FEMALE ONLY</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-title-row">
+                        <h3>Elysian Heights</h3>
+                        <div class="price">฿ 9,200<span>/Month</span></div>
+                    </div>
+                    <p class="distance">0.8km from Main Library</p>
+                    <div class="amenities">
+                        <span><span class="dot"></span>HI SPEED</span>
+                        <span><span class="dot"></span>AIR CON</span>
+                        <span><span class="dot"></span>PRIVATE</span>
+                    </div>
+                    <button class="btn btn-outline btn-full">VIEW DETAILS</button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="dorm-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=800');">
+                    <span class="tag">MIXED-STUDY</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-title-row">
+                        <h3>The Scholastic Loft</h3>
+                        <div class="price">฿ 7,800<span>/Month</span></div>
+                    </div>
+                    <p class="distance">Next to Central Plaza</p>
+                    <div class="amenities">
+                        <span><span class="dot"></span>HI SPEED</span>
+                        <span><span class="dot"></span>AIR CON</span>
+                        <span><span class="dot"></span>PRIVATE</span>
+                    </div>
+                    <button class="btn btn-outline btn-full">VIEW DETAILS</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section container">
+        <div class="section-header">
+            <div>
+                <span class="subtitle">PROXIMITY MATTERS</span>
+                <h2>Explore by Map</h2>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <div class="map-sidebar">
+                <span class="sidebar-title">FEATURED NEARBY</span>
+                <div class="featured-item">
+                    <div class="featured-img" style="background-color: #333;"></div>
+                    <div>
+                        <h4>The Ivy Suites</h4>
+                        <p>฿ 8,500/mo • 1.2km away</p>
+                    </div>
+                </div>
+                <div class="featured-item">
+                    <div class="featured-img" style="background-color: #333;"></div>
+                    <div>
+                        <h4>Elysian Heights</h4>
+                        <p>฿ 9,200/mo • 0.8km away</p>
+                    </div>
+                </div>
+            </div>
+            <div class="map-area">
+                <!-- Mock Map Grid Lines -->
+                <div class="map-grid-line line-1"></div>
+                <div class="map-grid-line line-2"></div>
+                <div class="map-grid-line line-3"></div>
+                
+                <!-- Map Pins -->
+                <div class="map-pin pin-1"></div>
+                <div class="map-pin pin-2">
+                    <div class="pin-label">THE SCHOLASTIC LOFT</div>
+                </div>
+                <div class="map-pin pin-3"></div>
+                
+                <button class="btn btn-primary btn-map-search">SEARCH FULL MAP</button>
+                
+                <div class="map-controls">
+                    <button>+</button>
+                    <button>-</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3 class="accent-text serif">DormHub</h3>
+                <p>The definitive standard for student living. Providing premium residences that bridge the gap between academic focus and holistic luxury.</p>
+            </div>
+            <div class="footer-links">
+                <h4>SITEMAP</h4>
+                <ul>
+                    <li><a href="#">Dormitories</a></li>
+                    <li><a href="#">Private Suites</a></li>
+                    <li><a href="#">Community Hub</a></li>
+                    <li><a href="#">Virtual Tours</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>FOR OWNERS</h4>
+                <ul>
+                    <li><a href="#">Advertise with Us</a></li>
+                    <li><a href="#">Owner Dashboard</a></li>
+                    <li><a href="#">Partner Program</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>SOCIAL MEDIA</h4>
+                <div class="social-icons">
+                    <a href="#">TW</a>
+                    <a href="#">IG</a>
+                    <a href="#">FB</a>
+                </div>
+                <h4 style="margin-top: 20px;">LEGAL</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 ACADEMIC HEARTH - ALL RIGHTS RESERVED.</p>
+            <p class="accent-text"><span class="dot"></span> DEVELOPED FOR THE KMITL EXCELLENCE PROGRAM</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
