@@ -99,6 +99,10 @@ header {
     z-index: 100;
 }
 
+header .container {
+    max-width: 100%;
+}
+
 .nav-container {
     display: flex;
     justify-content: space-between;
@@ -137,7 +141,7 @@ nav a.active {
     position: relative;
     height: 90vh;
     min-height: 600px;
-    background-image: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1920');
+    background-image: url('../assets/kmitlpcc.png');
     background-size: cover;
     background-position: center;
     display: flex;
