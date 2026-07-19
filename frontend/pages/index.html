@@ -1,332 +1,237 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DormHub - แนะนำหอพักนักศึกษาที่ดีที่สุดสำหรับคุณ</title>
-    <meta name="description" content="ค้นหาและแนะนำหอพักรอบมหาวิทยาลัย สะดวก ปลอดภัย ราคาคุ้มค่า พร้อมระบบกรองข้อมูลอัจฉริยะและแผนที่วิทยาเขต">
-    
-    <!-- Google Fonts: Prompt for Thai & Outfit for English numbers/modern look -->
+    <title>DormHub</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Linked CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- SVG GRADIENTS & ICON SETS -->
-    <svg style="display: none;">
-        <defs>
-            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="var(--accent-primary)"/>
-                <stop offset="100%" stop-color="var(--accent-secondary)"/>
-            </linearGradient>
-        </defs>
-    </svg>
-
-    <!-- HEADER -->
-    <header class="glass" id="main-header">
-        <div class="container nav-wrapper">
-            <div class="logo" onclick="window.scrollTo(0,0)">
-                <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 2.5l7 6.3V18h-2v-6H7v6H5v-6.2l7-6.3z"/>
-                </svg>
-                DormHub
+    <!-- Header / Navbar -->
+    <header id="navbar">
+        <div class="container nav-container">
+            <div class="logo">DormHub</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search dorms...">
             </div>
-            
-            <ul class="nav-links">
-                <li><a href="#home" class="active">หน้าแรก</a></li>
-                <li><a href="#listings">แนะนำหอพัก</a></li>
-                <li><a href="#contact">ติดต่อเรา</a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <!-- Theme Toggle Button -->
-                <button class="btn btn-outline btn-icon" id="theme-toggle" title="สลับโหมด">
-                    <!-- Moon Icon (for dark mode selection) -->
-                    <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <!-- Sun Icon (hidden by default) -->
-                    <svg id="sun-icon" style="display: none;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
+            <nav>
+                <a href="#" class="active">HOME</a>
+                <a href="#">ALL DORMS</a>
+                <a href="#">MAP</a>
+            </nav>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h1 class="hero-title">แนะนำ <span>หอพักนักศึกษา</span><br>ที่ตรงใจคุณที่สุด</h1>
-            <p class="hero-subtitle">ค้นหาสะดวก ปลอดภัย เดินทางง่าย ใกล้มหาวิทยาลัย พร้อมระบบกรองข้อมูลอัจฉริยะเพื่อเปรียบเทียบข้อมูลทันที</p>
-            
-            <!-- Quick Search Bar -->
-            <div class="search-bar glass">
-                <div class="search-input-wrapper">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    </svg>
-                    <input type="text" id="quick-search-name" placeholder="ค้นหาชื่อหอพักหรือทำเล...">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>Welcome to <span class="accent-text italic">DormHub</span></h1>
+            <p>Premium student housing tailored for the KMITL Chumphon community.<br>Elevate your academic journey with a living experience designed for excellence.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">EXPLORE DORMS</button>
+                <button class="btn btn-outline">BOOK A TOUR</button>
+            </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar-container container">
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label>DORM TYPE</label>
+                    <select>
+                        <option>All Types</option>
+                    </select>
                 </div>
-                <select id="quick-search-univ">
-                    <option value="">ทุกมหาวิทยาลัย</option>
-                    <option value="main-gate">ประตูใหญ่หลัก (ม.เกษตรศาสตร์)</option>
-                    <option value="side-gate">ประตูพหลโยธิน</option>
-                    <option value="vip-gate">ประตูวิภาวดี</option>
-                </select>
-                <select id="quick-search-price">
-                    <option value="">ทุกช่วงราคา</option>
-                    <option value="0-6000">ต่ำกว่า 6,000 บาท/เดือน</option>
-                    <option value="6000-8000">6,000 - 8,000 บาท/เดือน</option>
-                    <option value="8000+">8,000 บาทขึ้นไป/เดือน</option>
-                </select>
-                <button class="btn btn-primary" onclick="triggerSearch()">ค้นหา</button>
+                <div class="filter-group">
+                    <label>MONTHLY RATE</label>
+                    <select>
+                        <option>Any Price</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>CAMPUS DISTANCE</label>
+                    <select>
+                        <option>Within 2km</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary search-btn">SEARCH NOW</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dormitory List Section -->
+    <section class="dorms-section container">
+        <div class="section-header">
+            <div>
+                <span class="subtitle">SELECTED COLLECTION</span>
+                <h2>Dormitory for You</h2>
+            </div>
+            <a href="#" class="view-all">VIEW ALL LISTINGS &rarr;</a>
+        </div>
+
+        <div class="dorms-grid">
+            <!-- Card 1 -->
+            <div class="dorm-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&q=80&w=800');">
+                    <span class="tag">MALE ONLY</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-title-row">
+                        <h3>The Ivy Suites</h3>
+                        <div class="price">฿ 8,500<span>/Month</span></div>
+                    </div>
+                    <p class="distance">1.2km from South Gate</p>
+                    <div class="amenities">
+                        <span><span class="dot"></span>HI SPEED</span>
+                        <span><span class="dot"></span>AIR CON</span>
+                        <span><span class="dot"></span>PRIVATE</span>
+                    </div>
+                    <button class="btn btn-outline btn-full">VIEW DETAILS</button>
+                </div>
             </div>
 
-            <!-- Stats Counter -->
-            <div class="stats-wrapper">
-                <div class="stat-item">
-                    <div class="stat-number">3,500+</div>
-                    <div class="stat-label">ข้อมูลหอพักทั่วประเทศ</div>
+            <!-- Card 2 -->
+            <div class="dorm-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800');">
+                    <span class="tag">FEMALE ONLY</span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">12,000+</div>
-                    <div class="stat-label">นักศึกษาค้นหาต่อเดือน</div>
+                <div class="card-content">
+                    <div class="card-title-row">
+                        <h3>Elysian Heights</h3>
+                        <div class="price">฿ 9,200<span>/Month</span></div>
+                    </div>
+                    <p class="distance">0.8km from Main Library</p>
+                    <div class="amenities">
+                        <span><span class="dot"></span>HI SPEED</span>
+                        <span><span class="dot"></span>AIR CON</span>
+                        <span><span class="dot"></span>PRIVATE</span>
+                    </div>
+                    <button class="btn btn-outline btn-full">VIEW DETAILS</button>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">พึงพอใจในคำแนะนำ</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="dorm-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=800');">
+                    <span class="tag">MIXED-STUDY</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-title-row">
+                        <h3>The Scholastic Loft</h3>
+                        <div class="price">฿ 7,800<span>/Month</span></div>
+                    </div>
+                    <p class="distance">Next to Central Plaza</p>
+                    <div class="amenities">
+                        <span><span class="dot"></span>HI SPEED</span>
+                        <span><span class="dot"></span>AIR CON</span>
+                        <span><span class="dot"></span>PRIVATE</span>
+                    </div>
+                    <button class="btn btn-outline btn-full">VIEW DETAILS</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- MAIN APP SECTION -->
-    <section class="main-section container" id="listings">
-        <div class="app-layout">
-            
-            <!-- SIDEBAR FILTERS -->
-            <aside class="sidebar glass">
-                <div class="sidebar-title">
-                    <span>ตัวกรองการค้นหา</span>
-                    <button class="btn-outline" style="padding: 4px 8px; font-size: 12px; border-radius: var(--radius-sm);" onclick="resetFilters()">ล้างค่า</button>
+    <!-- Map Section -->
+    <section class="map-section container">
+        <div class="section-header">
+            <div>
+                <span class="subtitle">PROXIMITY MATTERS</span>
+                <h2>Explore by Map</h2>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <div class="map-sidebar">
+                <span class="sidebar-title">FEATURED NEARBY</span>
+                <div class="featured-item">
+                    <div class="featured-img" style="background-color: #333;"></div>
+                    <div>
+                        <h4>The Ivy Suites</h4>
+                        <p>฿ 8,500/mo • 1.2km away</p>
+                    </div>
                 </div>
+                <div class="featured-item">
+                    <div class="featured-img" style="background-color: #333;"></div>
+                    <div>
+                        <h4>Elysian Heights</h4>
+                        <p>฿ 9,200/mo • 0.8km away</p>
+                    </div>
+                </div>
+            </div>
+            <div class="map-area">
+                <!-- Mock Map Grid Lines -->
+                <div class="map-grid-line line-1"></div>
+                <div class="map-grid-line line-2"></div>
+                <div class="map-grid-line line-3"></div>
                 
-                <!-- Dorm Category -->
-                <div class="filter-group">
-                    <span class="filter-label">ประเภทหอพัก</span>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="gender" value="mixed" checked onchange="filterDorms()"> หอรวม
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="gender" value="female" checked onchange="filterDorms()"> หอหญิง
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="gender" value="male" checked onchange="filterDorms()"> หอชาย
-                    </label>
+                <!-- Map Pins -->
+                <div class="map-pin pin-1"></div>
+                <div class="map-pin pin-2">
+                    <div class="pin-label">THE SCHOLASTIC LOFT</div>
                 </div>
-
-                <!-- Price Range -->
-                <div class="filter-group">
-                    <span class="filter-label">ช่วงราคา (บาท/เดือน)</span>
-                    <div class="price-inputs">
-                        <input type="number" id="price-min" value="0" min="0" step="500" onchange="filterDorms()">
-                        <span>-</span>
-                        <input type="number" id="price-max" value="15000" min="0" step="500" onchange="filterDorms()">
-                    </div>
-                </div>
-
-                <!-- Facilities checkboxes -->
-                <div class="filter-group">
-                    <span class="filter-label">สิ่งอำนวยความสะดวก</span>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="facility" value="Wi-Fi" onchange="filterDorms()"> Wi-Fi ฟรี
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="facility" value="แอร์" onchange="filterDorms()"> แอร์
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="facility" value="ฟิตเนส" onchange="filterDorms()"> ฟิตเนส
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="facility" value="สระว่ายน้ำ" onchange="filterDorms()"> สระว่ายน้ำ
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="facility" value="ระบบรักษาความปลอดภัย 24 ชม." onchange="filterDorms()"> รปภ. 24 ชม.
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="facility" value="ที่จอดรถ" onchange="filterDorms()"> ที่จอดรถ
-                    </label>
-                </div>
-            </aside>
-
-            <!-- MAIN LISTINGS & VIEW TABS -->
-            <div class="listings-container">
+                <div class="map-pin pin-3"></div>
                 
-                <!-- Tab Headers -->
-                <div class="tab-header">
-                    <button class="tab-btn active" id="tab-btn-grid" onclick="switchTab('grid')">รายการแนะนำ</button>
-                    <button class="tab-btn" id="tab-btn-compare" onclick="switchTab('compare')">
-                        เปรียบเทียบข้อมูล <span class="count" id="compare-badge">0</span>
-                    </button>
-                    <button class="tab-btn" id="tab-btn-map" onclick="switchTab('map')">แผนที่วิทยาเขตจำลอง</button>
+                <button class="btn btn-primary btn-map-search">SEARCH FULL MAP</button>
+                
+                <div class="map-controls">
+                    <button>+</button>
+                    <button>-</button>
                 </div>
-
-                <!-- TAB CONTENT: DORM GRID -->
-                <div class="tab-content active" id="tab-grid">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <span id="results-count" style="color: var(--text-secondary); font-size: 14px;">พบหอพัก 3 แห่ง</span>
-                        <select id="sort-select" onchange="filterDorms()" style="padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-secondary); color: var(--text-primary); cursor: pointer;">
-                            <option value="recommend">แนะนำล่าสุด</option>
-                            <option value="price-asc">ราคา: ต่ำ -> สูง</option>
-                            <option value="price-desc">ราคา: สูง -> ต่ำ</option>
-                            <option value="rating">คะแนนรีวิวสูงสุด</option>
-                        </select>
-                    </div>
-
-                    <!-- Dorm Cards Grid -->
-                    <div class="dorm-grid" id="dorms-container">
-                        <!-- Dorm cards will be dynamically injected here by Javascript -->
-                    </div>
-                </div>
-
-                <!-- TAB CONTENT: COMPARE VIEW -->
-                <div class="tab-content" id="tab-compare">
-                    <div class="compare-view glass" id="compare-view-content">
-                        <!-- Comparison Table will be injected here -->
-                    </div>
-                </div>
-
-                <!-- TAB CONTENT: SIMULATED MAP -->
-                <div class="tab-content" id="tab-map">
-                    <div class="map-view-wrapper">
-                        <!-- SVG map -->
-                        <div class="map-canvas-container">
-                            <svg class="map-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Background grid / grass -->
-                                <rect width="600" height="400" fill="var(--bg-tertiary)"/>
-                                
-                                <!-- University Campus -->
-                                <rect x="220" y="100" width="160" height="150" rx="10" fill="var(--border-color)" opacity="0.6"/>
-                                <text x="300" y="180" font-family="'Prompt'" font-size="14" font-weight="600" text-anchor="middle" fill="var(--text-secondary)">
-                                    มหาวิทยาลัยหลัก (KU Campus)
-                                </text>
-                                
-                                <!-- Roads -->
-                                <rect x="0" y="270" width="600" height="25" fill="#475569" opacity="0.4"/>
-                                <text x="80" y="286" font-family="'Prompt'" font-size="10" fill="#ffffff" opacity="0.7">ถ.งามวงศ์วาน</text>
-                                <rect x="180" y="0" width="25" height="400" fill="#475569" opacity="0.4"/>
-                                <text x="192" y="360" font-family="'Prompt'" font-size="10" fill="#ffffff" opacity="0.7" transform="rotate(-90 192 360)">ถ.พหลโยธิน</text>
-
-                                <!-- Dorm Pin 1 -->
-                                <g class="map-pin" id="pin-1" onclick="selectDormFromMap(1)">
-                                    <circle cx="150" cy="120" r="14" fill="var(--accent-primary)"/>
-                                    <text x="150" y="124" font-family="'Outfit'" font-size="12" fill="#ffffff" font-weight="700" text-anchor="middle">1</text>
-                                    <text x="150" y="96" font-family="'Prompt'" font-size="10" fill="var(--text-primary)" text-anchor="middle" font-weight="500">แสนสิริคอร์ท</text>
-                                </g>
-
-                                <!-- Dorm Pin 2 -->
-                                <g class="map-pin" id="pin-2" onclick="selectDormFromMap(2)">
-                                    <circle cx="430" cy="220" r="14" fill="var(--accent-primary)"/>
-                                    <text x="430" y="224" font-family="'Outfit'" font-size="12" fill="#ffffff" font-weight="700" text-anchor="middle">2</text>
-                                    <text x="430" y="196" font-family="'Prompt'" font-size="10" fill="var(--text-primary)" text-anchor="middle" font-weight="500">บ้านอบอุ่น</text>
-                                </g>
-
-                                <!-- Dorm Pin 3 -->
-                                <g class="map-pin" id="pin-3" onclick="selectDormFromMap(3)">
-                                    <circle cx="100" cy="330" r="14" fill="var(--accent-primary)"/>
-                                    <text x="100" y="334" font-family="'Outfit'" font-size="12" fill="#ffffff" font-weight="700" text-anchor="middle">3</text>
-                                    <text x="100" y="306" font-family="'Prompt'" font-size="10" fill="var(--text-primary)" text-anchor="middle" font-weight="500">มูจิเฮาส์</text>
-                                </g>
-                            </svg>
-                        </div>
-                        
-                        <!-- Map Sidebar information -->
-                        <div class="map-info-sidebar" id="map-sidebar-content">
-                            <!-- Injected by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 
-    <!-- DETAILS MODAL -->
-    <div class="modal" id="details-modal">
-        <div class="modal-overlay" onclick="closeModal('details-modal')"></div>
-        <div class="modal-container glass">
-            <button class="modal-close-btn" onclick="closeModal('details-modal')">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <div id="modal-detail-content">
-                <!-- Dynamic Content Injected here -->
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3 class="accent-text serif">DormHub</h3>
+                <p>The definitive standard for student living. Providing premium residences that bridge the gap between academic focus and holistic luxury.</p>
+            </div>
+            <div class="footer-links">
+                <h4>SITEMAP</h4>
+                <ul>
+                    <li><a href="#">Dormitories</a></li>
+                    <li><a href="#">Private Suites</a></li>
+                    <li><a href="#">Community Hub</a></li>
+                    <li><a href="#">Virtual Tours</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>FOR OWNERS</h4>
+                <ul>
+                    <li><a href="#">Advertise with Us</a></li>
+                    <li><a href="#">Owner Dashboard</a></li>
+                    <li><a href="#">Partner Program</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>SOCIAL MEDIA</h4>
+                <div class="social-icons">
+                    <a href="#">TW</a>
+                    <a href="#">IG</a>
+                    <a href="#">FB</a>
+                </div>
+                <h4 style="margin-top: 20px;">LEGAL</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
             </div>
         </div>
-    </div>
-
-    <!-- FOOTER -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-logo">DormHub</div>
-                    <p style="line-height: 1.6; margin-bottom: 20px;">แพลตฟอร์มแนะนำข้อมูลหอพักรอบมหาวิทยาลัย สะอาด สะดวก ปลอดภัย และเหมาะกับนักศึกษา</p>
-                </div>
-                <div class="footer-links-col">
-                    <h4>มหาวิทยาลัยยอดนิยม</h4>
-                    <ul>
-                        <li><a href="#">มหาวิทยาลัยเกษตรศาสตร์</a></li>
-                        <li><a href="#">จุฬาลงกรณ์มหาวิทยาลัย</a></li>
-                        <li><a href="#">มหาวิทยาลัยธรรมศาสตร์</a></li>
-                        <li><a href="#">มหาวิทยาลัยมหิดล</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links-col">
-                    <h4>ติดต่อและช่วยเหลือ</h4>
-                    <ul>
-                        <li><a href="#">คำถามที่พบบ่อย (FAQs)</a></li>
-                        <li><a href="#">วิธีเชื่อมต่อที่พักกับเรา</a></li>
-                        <li><a href="#">นโยบายความเป็นส่วนตัว</a></li>
-                        <li><a href="#">ข้อตกลงการใช้งาน</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links-col">
-                    <h4>ช่องทางการติดต่อ</h4>
-                    <ul>
-                        <li>อีเมล: info@dormhub.co.th</li>
-                        <li>โทรศัพท์: 02-123-4567</li>
-                        <li>เวลาทำการ: 09:00 - 18:00 น. ทุกวัน</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 DormHub. All rights reserved. มหาวิทยาลัยปี 3 เทอม 1 โปรเจกต์แนะนำหอพัก</p>
-                <div style="display: flex; gap: 20px;">
-                    <a href="#">Facebook</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">Instagram</a>
-                </div>
-            </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 ACADEMIC HEARTH - ALL RIGHTS RESERVED.</p>
+            <p class="accent-text"><span class="dot"></span> DEVELOPED FOR THE KMITL EXCELLENCE PROGRAM</p>
         </div>
     </footer>
 
-    <!-- Linked JS -->
-    <script src="app.js" defer></script>
+    <script src="script.js"></script>
 </body>
 </html>
