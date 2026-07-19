@@ -13,22 +13,72 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Mock functionality for Buttons
-    const buttons = document.querySelectorAll('.btn');
+    // Mock functionality for non-submit Buttons
+    const buttons = document.querySelectorAll('.btn:not(.search-btn)');
     buttons.forEach(button => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
-            // Just for demonstration
             console.log(e.target.innerText + ' clicked!');
         });
     });
-    
-    // As per the file reference "Academic Hearth - Home (Dark with Theme Toggle).jpg"
-    // The theme is built natively in Dark Mode via CSS variables.
-    // If a light mode toggle is needed in the future, you would toggle a class on the body here.
-    /*
-    const toggleTheme = () => {
-        document.body.classList.toggle('light-theme');
-    };
-    */
+
+    // Filter functionality
+    const searchBtn = document.querySelector('.search-btn');
+    const typeSelect = document.getElementById('filter-dorm-type');
+    const priceSelect = document.getElementById('filter-price');
+    const roomTypeSelect = document.getElementById('filter-room-type');
+    const cards = document.querySelectorAll('.dorm-card');
+
+    function runFilters() {
+        const selectedType = typeSelect.value;
+        const selectedPrice = priceSelect.value;
+        const selectedRoomType = roomTypeSelect.value;
+
+        cards.forEach(card => {
+            const gender = card.getAttribute('data-gender');
+            const price = parseFloat(card.getAttribute('data-price'));
+            const roomType = card.getAttribute('data-room-type');
+
+            let matchesType = !selectedType || gender === selectedType;
+            
+            let matchesPrice = true;
+            if (selectedPrice) {
+                if (selectedPrice === '0-8000' && price >= 8000) matchesPrice = false;
+                else if (selectedPrice === '8000-9000' && (price < 8000 || price > 9000)) matchesPrice = false;
+                else if (selectedPrice === '9000+' && price < 9000) matchesPrice = false;
+            }
+
+            let matchesRoomType = !selectedRoomType || roomType === selectedRoomType;
+
+            if (matchesType && matchesPrice && matchesRoomType) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    if (searchBtn && typeSelect && priceSelect && roomTypeSelect) {
+        searchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            runFilters();
+        });
+    }
+
+    // Header Search functionality
+    const headerSearchInput = document.querySelector('.search-bar input');
+    if (headerSearchInput) {
+        headerSearchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            cards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                const matchesSearch = !query || title.includes(query);
+                if (matchesSearch) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
 });

@@ -95,7 +95,7 @@ header {
     position: absolute;
     top: 0;
     width: 100%;
-    padding: 20px 0;
+    padding: 6px 0;
     z-index: 100;
 }
 
@@ -116,14 +116,47 @@ header .container {
     color: var(--accent);
 }
 
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+@media (min-width: 769px) {
+    .search-bar {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.search-bar svg {
+    position: absolute;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+    fill: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+}
+
 .search-bar input {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 8px 16px;
+    padding: 8px 16px 8px 36px;
     border-radius: 20px;
     color: white;
-    width: 250px;
+    width: 400px;
+    max-width: 100%;
     font-family: var(--font-sans);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
 nav a {
@@ -201,6 +234,9 @@ nav a.active {
     justify-content: space-between;
     padding: 20px 30px;
     border: 1px solid var(--border-color);
+    max-width: 850px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .filter-group {
@@ -221,13 +257,24 @@ nav a.active {
 }
 
 .filter-group select {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    border-radius: 4px;
     outline: none;
-    appearance: none;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-group select:hover {
+    border-color: var(--accent);
+}
+
+.filter-group select option {
+    background-color: var(--bg-card);
+    color: var(--text-main);
 }
 
 .search-btn {

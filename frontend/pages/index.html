@@ -15,14 +15,18 @@
     <!-- Header / Navbar -->
     <header id="navbar">
         <div class="container nav-container">
-            <div class="logo">Dormhub</div>
+            <div class="logo">
+                <img src="../assets/logoweb.png" alt="DormHub" style="height: 56px; object-fit: contain; display: block;">
+            </div>
             <div class="search-bar">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
                 <input type="text" placeholder="Search dorms...">
             </div>
             <nav>
                 <a href="#" class="active">HOME</a>
                 <a href="#">ALL DORMS</a>
-                <a href="#">MAP</a>
             </nav>
         </div>
     </header>
@@ -44,20 +48,29 @@
             <div class="filter-bar">
                 <div class="filter-group">
                     <label>DORM TYPE</label>
-                    <select>
-                        <option>All Types</option>
+                    <select id="filter-dorm-type">
+                        <option value="">All Types</option>
+                        <option value="male">Male Only</option>
+                        <option value="female">Female Only</option>
+                        <option value="mixed">Mixed-Study</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>ROOM TYPE</label>
+                    <select id="filter-room-type">
+                        <option value="">Any Room Type</option>
+                        <option value="studio">Studio</option>
+                        <option value="suite">Suite</option>
+                        <option value="loft">Loft</option>
                     </select>
                 </div>
                 <div class="filter-group">
                     <label>MONTHLY RATE</label>
-                    <select>
-                        <option>Any Price</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>CAMPUS DISTANCE</label>
-                    <select>
-                        <option>Within 2km</option>
+                    <select id="filter-price">
+                        <option value="">Any Price</option>
+                        <option value="0-8000">Below ฿ 8,000</option>
+                        <option value="8000-9000">฿ 8,000 - ฿ 9,000</option>
+                        <option value="9000+">Above ฿ 9,000</option>
                     </select>
                 </div>
                 <button class="btn btn-primary search-btn">SEARCH NOW</button>
@@ -77,7 +90,7 @@
 
         <div class="dorms-grid">
             <!-- Card 1 -->
-            <div class="dorm-card">
+            <div class="dorm-card" data-gender="male" data-price="8500" data-room-type="suite">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&q=80&w=800');">
                     <span class="tag">MALE ONLY</span>
                 </div>
@@ -97,7 +110,7 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="dorm-card">
+            <div class="dorm-card" data-gender="female" data-price="9200" data-room-type="studio">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800');">
                     <span class="tag">FEMALE ONLY</span>
                 </div>
@@ -117,7 +130,7 @@
             </div>
 
             <!-- Card 3 -->
-            <div class="dorm-card">
+            <div class="dorm-card" data-gender="mixed" data-price="7800" data-room-type="loft">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=800');">
                     <span class="tag">MIXED-STUDY</span>
                 </div>
@@ -138,55 +151,7 @@
         </div>
     </section>
 
-    <!-- Map Section -->
-    <section class="map-section container">
-        <div class="section-header">
-            <div>
-                <span class="subtitle">PROXIMITY MATTERS</span>
-                <h2>Explore by Map</h2>
-            </div>
-        </div>
 
-        <div class="map-container">
-            <div class="map-sidebar">
-                <span class="sidebar-title">FEATURED NEARBY</span>
-                <div class="featured-item">
-                    <div class="featured-img" style="background-color: #333;"></div>
-                    <div>
-                        <h4>The Ivy Suites</h4>
-                        <p>฿ 8,500/mo • 1.2km away</p>
-                    </div>
-                </div>
-                <div class="featured-item">
-                    <div class="featured-img" style="background-color: #333;"></div>
-                    <div>
-                        <h4>Elysian Heights</h4>
-                        <p>฿ 9,200/mo • 0.8km away</p>
-                    </div>
-                </div>
-            </div>
-            <div class="map-area">
-                <!-- Mock Map Grid Lines -->
-                <div class="map-grid-line line-1"></div>
-                <div class="map-grid-line line-2"></div>
-                <div class="map-grid-line line-3"></div>
-                
-                <!-- Map Pins -->
-                <div class="map-pin pin-1"></div>
-                <div class="map-pin pin-2">
-                    <div class="pin-label">THE SCHOLASTIC LOFT</div>
-                </div>
-                <div class="map-pin pin-3"></div>
-                
-                <button class="btn btn-primary btn-map-search">SEARCH FULL MAP</button>
-                
-                <div class="map-controls">
-                    <button>+</button>
-                    <button>-</button>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer>
