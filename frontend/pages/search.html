@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>DormHub | Find Your Space</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #101415;
+    }
+
+    .search-glow:focus-within {
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.1);
+    }
+
+    .glass-card {
+      background: #ffffff;
+      border: 1px solid #eff4ff;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+  </style>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#2563eb",
+            "on-primary": "#ffffff",
+            "primary-container": "#eff4ff",
+            "on-primary-container": "#2563eb",
+            "secondary": "#0284c7",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#e0f2fe",
+            "on-secondary-container": "#0284c7",
+            "tertiary": "#4f46e5",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#eef2ff",
+            "on-tertiary-container": "#4f46e5",
+            "background": "#ffffff",
+            "on-background": "#101415",
+            "surface": "#f8f9ff",
+            "on-surface": "#101415",
+            "surface-variant": "#f1f5f9",
+            "on-surface-variant": "#64748b",
+            "outline": "#cbd5e1",
+            "outline-variant": "#e2e8f0",
+            "error": "#dc2626",
+            "on-error": "#ffffff",
+            "error-container": "#fee2e2",
+            "on-error-container": "#dc2626",
+            "surface-container": "#eff4ff",
+            "surface-container-low": "#f8fafc",
+            "surface-container-high": "#f1f5f9",
+            "surface-container-highest": "#e2e8f0"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-mobile": "16px",
+            "margin-desktop": "40px",
+            "xs": "4px",
+            "base": "8px",
+            "lg": "24px",
+            "gutter": "24px",
+            "xl": "40px",
+            "xxl": "64px",
+            "container-max": "1280px",
+            "md": "16px",
+            "sm": "8px"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-xl": ["Inter"]
+          },
+          "fontSize": {
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+            "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "600"}],
+            "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+
+<body class="bg-background text-on-surface antialiased">
+  <!-- TopNavBar -->
+  <header class="fixed top-0 w-full z-50 bg-background border-b border-outline-variant">
+    <div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop py-4">
+      <div class="text-headline-md font-headline-md font-bold text-primary">DormHub</div>
+      <nav class="hidden md:flex items-center gap-xl">
+        <a class="text-on-surface font-medium hover:text-primary transition-colors duration-200" href="#">Home</a>
+        <a class="text-on-surface font-medium hover:text-primary transition-colors duration-200" href="#">Explore</a>
+        <a class="text-primary font-bold border-b-2 border-primary pb-1 active:scale-95 transition-transform duration-150"
+          href="#">Search</a>
+        <a class="text-on-surface font-medium hover:text-primary transition-colors duration-200" href="#">About</a>
+      </nav>
+      <div class="flex items-center gap-md">
+        <button
+          class="bg-primary text-on-primary px-lg py-2 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all active:scale-95">Login</button>
+      </div>
+    </div>
+  </header>
+  <main class="pt-xxl min-h-screen">
+    <!-- Hero Search Section -->
+    <section class="relative py-xxl overflow-hidden bg-surface-container-low">
+      <div class="relative z-10 max-w-3xl mx-auto px-margin-mobile text-center">
+        <h1 class="text-headline-xl font-headline-xl text-on-surface mb-lg">Find your next home.</h1>
+        <div class="relative search-glow transition-all duration-300">
+          <div
+            class="flex items-center bg-background rounded-xl p-2 border border-outline-variant focus-within:border-primary shadow-sm">
+            <span class="material-symbols-outlined px-md text-on-surface-variant">search</span>
+            <input
+              class="w-full bg-transparent border-none focus:ring-0 text-body-lg font-body-lg py-4 placeholder:text-on-surface-variant"
+              id="main-search" placeholder="Search by university, city, or dormitory name..." type="text" />
+            <button
+              class="bg-primary text-on-primary px-xxl py-3 rounded-lg font-label-md text-label-md font-bold hover:brightness-110 transition-all">Search</button>
+          </div>
+          <!-- Suggestions Dropdown (Hidden by default) -->
+          <div
+            class="hidden absolute top-full left-0 w-full mt-base glass-card rounded-xl overflow-hidden text-left z-20"
+            id="suggestions">
+            <div
+              class="p-md text-label-sm text-on-surface-variant border-b border-outline-variant uppercase tracking-wider">
+              Suggested Results</div>
+            <div class="p-base hover:bg-surface-variant cursor-pointer flex items-center gap-md">
+              <span class="material-symbols-outlined text-primary">location_on</span>
+              <div>
+                <div class="text-body-md font-medium">Cambridge Residence Halls</div>
+                <div class="text-label-sm text-on-surface-variant">2.5 miles from MIT Campus</div>
+              </div>
+            </div>
+            <div class="p-base hover:bg-surface-variant cursor-pointer flex items-center gap-md">
+              <span class="material-symbols-outlined text-primary">apartment</span>
+              <div>
+                <div class="text-body-md font-medium">The Union Square Suites</div>
+                <div class="text-label-sm text-on-surface-variant">Near NYU, Manhattan</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Recent Searches -->
+        <div class="mt-xl flex flex-wrap justify-center items-center gap-sm">
+          <span class="text-label-md text-on-surface-variant mr-base">Recent:</span>
+          <button
+            class="px-md py-base bg-background text-on-surface rounded-full border border-outline-variant hover:border-primary hover:text-primary transition-colors text-label-sm font-label-sm shadow-sm">Stanford
+            Living</button>
+          <button
+            class="px-md py-base bg-background text-on-surface rounded-full border border-outline-variant hover:border-primary hover:text-primary transition-colors text-label-sm font-label-sm shadow-sm">En-suite
+            Rooms</button>
+          <button
+            class="px-md py-base bg-background text-on-surface rounded-full border border-outline-variant hover:border-primary hover:text-primary transition-colors text-label-sm font-label-sm shadow-sm">London
+            Student Hub</button>
+        </div>
+      </div>
+    </section>
+    <!-- Dynamic Results / Popular Section -->
+    <section class="max-w-container-max mx-auto px-margin-desktop py-xl">
+      <div class="flex justify-between items-end mb-xl">
+        <div>
+          <h2 class="text-headline-lg font-headline-lg text-on-surface" id="section-title">Popular Dormitories</h2>
+          <p class="text-body-md text-on-surface-variant">Handpicked stays based on student ratings and proximity.</p>
+        </div>
+        <div class="flex gap-sm">
+          <button
+            class="p-base rounded-lg border border-outline-variant hover:bg-surface-variant transition-colors"><span
+              class="material-symbols-outlined">tune</span></button>
+          <button
+            class="p-base rounded-lg border border-outline-variant hover:bg-surface-variant transition-colors"><span
+              class="material-symbols-outlined">grid_view</span></button>
+        </div>
+      </div>
+      <!-- Bento-style Grid for Results -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-xl" id="results-grid">
+        <!-- Card 1 -->
+        <div class="group glass-card rounded-xl overflow-hidden hover:translate-y-[-4px] transition-all duration-300">
+          <div class="relative h-64 overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
+              data-alt="A luxurious, contemporary student dormitory room"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAkDgxHHnTYBDGSCH02npRrWBnEMXb1NzISXvMBjLWZHIp1gvNWNxDt9SVaDSpC52-M-58XTZCm7fDPnV0MsRO1mGUtuHeKrTF3WAVh1SDYsikEYFqXEXkEVu94xJZrVVkmwrJ6Q20iWO_-1fpARh6ilJyj2zy4-7PTazeGQq-Nw-gI3Y1h1acJm2XuOonFyuc96cariE2xv15MGZbQb5zATql0rL_LfR8wepLfukxpX6LQyoFL43PS4eCLG9HZwiTpnaJTIxeX9DQ')">
+            </div>
+            <div
+              class="absolute top-md right-md bg-secondary text-on-secondary px-md py-base rounded-lg font-bold text-label-sm">
+              TOP RATED</div>
+          </div>
+          <div class="p-lg">
+            <div class="flex justify-between items-start mb-sm">
+              <h3 class="text-headline-md font-headline-md text-on-surface">The Zenith Heights</h3>
+              <span class="text-primary font-bold">$1,200/mo</span>
+            </div>
+            <div class="flex items-center gap-xs text-on-surface-variant mb-md">
+              <span class="material-symbols-outlined text-sm">location_on</span>
+              <span class="text-label-md">Near Harvard Square, Cambridge</span>
+            </div>
+            <div class="flex gap-base mb-lg">
+              <span class="px-sm py-xs bg-primary-container text-on-primary-container rounded text-label-sm">High-speed
+                WiFi</span>
+              <span class="px-sm py-xs bg-primary-container text-on-primary-container rounded text-label-sm">Gym</span>
+            </div>
+            <button
+              class="w-full py-md border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary hover:text-on-primary transition-all active:scale-95">View
+              Details</button>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="group glass-card rounded-xl overflow-hidden hover:translate-y-[-4px] transition-all duration-300">
+          <div class="relative h-64 overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
+              data-alt="A modern, social communal space in a student dormitory"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDN8jH2RD4pH7SHmpEGE05uErqeIJzb4go766grw5vEpe_TYzMfo-M25wGKTCb235G2aqTlalvwpfv4ao8FVrtWv8s10RILOLeoAQqMfVzgoxATZytiyMAbcv0tOMplup0n65aVfwLEqALJkYWBvCy9OZ89UdpQMF_lQGrwCHzY50chqGgkRUNnr3KRAaiXq4vnLdKdIk6SFHK2L0jr08dv70Vz1db92ewBmEVPAqgUTY5IrWPFv1gzjkVZWPdHtzZrm-3hq0AA2qE')">
+            </div>
+            <div
+              class="absolute top-md right-md bg-tertiary text-on-tertiary px-md py-base rounded-lg font-bold text-label-sm">
+              NEWLY LISTED</div>
+          </div>
+          <div class="p-lg">
+            <div class="flex justify-between items-start mb-sm">
+              <h3 class="text-headline-md font-headline-md text-on-surface">Nexus Commons</h3>
+              <span class="text-primary font-bold">$950/mo</span>
+            </div>
+            <div class="flex items-center gap-xs text-on-surface-variant mb-md">
+              <span class="material-symbols-outlined text-sm">location_on</span>
+              <span class="text-label-md">Silicon Valley Hub, CA</span>
+            </div>
+            <div class="flex gap-base mb-lg">
+              <span
+                class="px-sm py-xs bg-tertiary-container text-on-tertiary-container rounded text-label-sm">En-suite</span>
+              <span class="px-sm py-xs bg-tertiary-container text-on-tertiary-container rounded text-label-sm">24/7
+                Security</span>
+            </div>
+            <button
+              class="w-full py-md border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary hover:text-on-primary transition-all active:scale-95">View
+              Details</button>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="group glass-card rounded-xl overflow-hidden hover:translate-y-[-4px] transition-all duration-300">
+          <div class="relative h-64 overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
+              data-alt="A vibrant student dormitory lounge at night"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAjpwRL0q_VX4WqDF7xUu6DwMA7uYstP5itt8hWH6X5hquLwddL08Q9toIsbj7M5-tVGJywl2ZQQcNUDDXWJsMHLk8jhBGMpEp2JenItTiPnhry_fou9gHEA35sLiz6braNZMRndv4WJtqs68hmuuD_PctcexiXDVwLmhe638_K8dAeC9T9JOQH1zgu_qs5hV7vcCrYqrcFfsgqid3ur9RDBTKCyq4zrO2XytEgE5oyEiMA7kqsxgWLjD9FWnMG8HOezDG39-K3JkY')">
+            </div>
+            <div
+              class="absolute top-md right-md bg-error text-on-error px-md py-base rounded-lg font-bold text-label-sm">
+              LAST FEW ROOMS</div>
+          </div>
+          <div class="p-lg">
+            <div class="flex justify-between items-start mb-sm">
+              <h3 class="text-headline-md font-headline-md text-on-surface">Oxford Central</h3>
+              <span class="text-primary font-bold">$1,450/mo</span>
+            </div>
+            <div class="flex items-center gap-xs text-on-surface-variant mb-md">
+              <span class="material-symbols-outlined text-sm">location_on</span>
+              <span class="text-label-md">City Center, Oxford</span>
+            </div>
+            <div class="flex gap-base mb-lg">
+              <span
+                class="px-sm py-xs bg-error-container text-on-error-container rounded text-label-sm">Breakfast</span>
+              <span class="px-sm py-xs bg-error-container text-on-error-container rounded text-label-sm">Roof
+                Garden</span>
+            </div>
+            <button
+              class="w-full py-md border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary hover:text-on-primary transition-all active:scale-95">View
+              Details</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer class="w-full mt-xxl bg-surface-container-low border-t border-outline-variant">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-xl max-w-container-max mx-auto px-margin-desktop py-xxl">
+      <div class="col-span-1 md:col-span-1">
+        <div class="text-headline-md font-headline-md font-bold text-primary mb-md">DormHub</div>
+        <p class="text-on-surface-variant text-body-md">Connecting students with premium living spaces since 2024.</p>
+      </div>
+      <div>
+        <h4 class="text-on-surface font-bold mb-md">Company</h4>
+        <ul class="space-y-base text-label-sm">
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">University Partners</a>
+          </li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Us</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-on-surface font-bold mb-md">Legal</h4>
+        <ul class="space-y-base text-label-sm">
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-on-surface font-bold mb-md">Newsletter</h4>
+        <div class="flex gap-sm">
+          <input
+            class="bg-background border border-outline-variant rounded-lg text-on-surface text-label-sm w-full px-md"
+            placeholder="Email address" type="email" />
+          <button
+            class="bg-primary text-on-primary px-md py-2 rounded-lg font-bold text-label-sm hover:brightness-110">Join</button>
+        </div>
+        <p class="text-label-sm text-on-surface-variant mt-base">Weekly dormitory deals.</p>
+      </div>
+    </div>
+    <div
+      class="max-w-container-max mx-auto px-margin-desktop py-lg border-t border-outline-variant text-center md:text-left">
+      <p class="text-on-surface-variant text-label-sm">© 2024 DormHub Inc. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    const searchInput = document.getElementById('main-search');
+    const suggestions = document.getElementById('suggestions');
+    const sectionTitle = document.getElementById('section-title');
+
+    // Simple interactive search demo
+    searchInput.addEventListener('input', (e) => {
+      const val = e.target.value;
+      if (val.length > 2) {
+        suggestions.classList.remove('hidden');
+        sectionTitle.innerText = `Searching for "${val}"...`;
+      } else {
+        suggestions.classList.add('hidden');
+        sectionTitle.innerText = 'Popular Dormitories';
+      }
+    });
+
+    // Close suggestions on click outside
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+        suggestions.classList.add('hidden');
+      }
+    });
+
+    // Hover animation logic for cards
+    const cards = document.querySelectorAll('.group');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.borderColor = '#2563eb';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.borderColor = '#eff4ff';
+      });
+    });
+  </script>
+</body>
+
+</html>
