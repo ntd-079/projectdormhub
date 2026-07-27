@@ -27,14 +27,15 @@ const all = (sql, params = []) => new Promise((resolvePromise, reject) => {
   db.all(sql, params, (error, rows) => (error ? reject(error) : resolvePromise(rows)));
 });
 
+const exec = (sql) => new Promise((resolvePromise, reject) => {
+  db.exec(sql, (error) => (error ? reject(error) : resolvePromise()));
+});
+
 async function initializeDatabase() {
-  const migration = readFileSync(resolve(__dirname, '../database/migrations/001_create_messages.sql'), 'utf8');
-  await run(migration);
-  const count = await all('SELECT COUNT(*) AS count FROM messages');
-  if (count[0].count === 0) {
-    const seed = readFileSync(resolve(__dirname, '../database/seeds/001_hello_world.sql'), 'utf8');
-    await run(seed);
-  }
+  const schema = readFileSync(resolve(__dirname, '../database/schema.sql'), 'utf8');
+  const seed = readFileSync(resolve(__dirname, '../database/seed.sql'), 'utf8');
+  await exec(schema);
+  await exec(seed);
 }
 
 app.get('/api/health', (_request, response) => {
