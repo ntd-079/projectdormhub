@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About DormHub | Finding Your Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.05);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+    </style>
+</head>
+<body class="bg-[#ffffff] text-[#1a1c1e] antialiased overflow-x-hidden">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#2563eb",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#dbeafe",
+                        "on-primary-container": "#1e40af",
+                        "secondary": "#0891b2",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#cffafe",
+                        "on-secondary-container": "#155e75",
+                        "tertiary": "#7c3aed",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#ede9fe",
+                        "on-tertiary-container": "#5b21b6",
+                        "error": "#dc2626",
+                        "on-error": "#ffffff",
+                        "error-container": "#fee2e2",
+                        "on-error-container": "#991b1b",
+                        "background": "#ffffff",
+                        "on-background": "#1a1c1e",
+                        "surface": "#f8f9ff",
+                        "on-surface": "#1a1c1e",
+                        "surface-variant": "#f1f5f9",
+                        "on-surface-variant": "#475569",
+                        "outline": "#94a3b8",
+                        "outline-variant": "#e2e8f0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container": "#f1f5f9",
+                        "surface-container-high": "#e2e8f0",
+                        "surface-container-highest": "#cbd5e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "xl": "40px",
+                        "xxl": "64px",
+                        "container-max": "1280px",
+                        "md": "16px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline-variant">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop py-4">
+<div class="text-headline-md font-headline-md font-bold text-primary">DormHub</div>
+<div class="hidden md:flex items-center gap-xl">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Home</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Explore</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Search</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">About</a>
+</div>
+<div class="flex items-center gap-lg">
+<div class="hidden md:flex items-center px-4 py-2 bg-surface-variant rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="search">search</span>
+<span class="text-label-md font-label-md">Search</span>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-md hover:brightness-110 active:scale-95 transition-all">Login</button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[700px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center brightness-[0.85] scale-105 transform transition-transform duration-[10s]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA6CAkx9IvRefSWfdBLGD0thnwZQbOq9OAEuueIi8wXcS7MQxM2onVxbPlQCxS8m7D8e8zNEdbU-ypRJXnwCXwZjt8aTG3euL6jEmVZc4aGjRXC6_tCF5Q2YltUK679OGXKO0h3ysqlhtw743NzX1l5fEzqxzkJEV0RJZvF415gLTQC1Kc06xluSX9HsK41S40NdaVkGL-zLOLiZbpzKBg3jYSp6YAZhuOlS7aZqWp2lme4Z8W-GeTK0g2sJJb-NwPbLwgTNtW2-Xk')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop text-center">
+<h1 class="text-headline-xl font-headline-xl text-[#0f172a] mb-lg max-w-3xl mx-auto">Finding a place that <span class="text-primary italic">feels like home</span>.</h1>
+<p class="text-body-lg font-body-lg text-slate-600 max-w-2xl mx-auto mb-xl">University life is challenging enough. Your home shouldn't be. We're bridging the gap between housing and belonging.</p>
+<div class="flex flex-col md:flex-row gap-lg justify-center">
+<button class="bg-primary text-white px-xxl py-4 rounded-xl font-headline-md shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-95">Join the Community</button>
+<button class="border-2 border-primary text-primary px-xxl py-4 rounded-xl font-headline-md hover:bg-primary/5 transition-all active:scale-95">List Your Dorm</button>
+</div>
+</div>
+</section>
+<!-- The Problem: The Struggle -->
+<section class="py-xxl max-w-container-max mx-auto px-margin-desktop bg-white">
+<div class="flex flex-col md:flex-row gap-xxl items-center">
+<div class="w-full md:w-1/2 space-y-lg">
+<span class="text-primary font-bold tracking-widest text-label-md uppercase">The Struggle</span>
+<h2 class="text-headline-lg font-headline-lg text-[#0f172a]">Why is student housing so broken?</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">We've all been there. Scouring endless lists of overpriced rooms, dealing with unresponsive landlords, and settling for spaces that feel more like cells than homes. The student housing market has been stuck in the past—transactional, opaque, and devoid of soul.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-lg pt-lg">
+<div class="p-lg bg-surface-container-low rounded-xl border border-outline-variant shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl mb-sm" data-icon="sentiment_dissatisfied">sentiment_dissatisfied</span>
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-xs">Isolation</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Moving to a new city alone can be daunting without a built-in community.</p>
+</div>
+<div class="p-lg bg-surface-container-low rounded-xl border border-outline-variant shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl mb-sm" data-icon="visibility_off">visibility_off</span>
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-semibold mb-xs">Insecurity</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Unreliable listings and lack of transparent reviews create constant anxiety.</p>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2">
+<div class="relative rounded-2xl overflow-hidden aspect-square shadow-xl">
+<div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAW_yPZ2egzNc62kmFxOBElHMRWXvPYuTRCoBQjUQ9926f6XDifOnzDxa2eKq8_LcLyZmKThmaeSTNCEPRKrTxb5LE8vYHTQo8rr5Azjvh-Ef3ijvF_k97fFktLYNpQF6NcwjHxbjVwBTHjN-zoc1Yaup2lirGg061alcrsCSouADSCjZLFj3OkwiuLH032g3Kmd9g0h9PLQGgR-8ddEsuWFI4vo3I3a56w6g2Opg7rhaSM9aYF-6IpQuQ998oZPyHqexDJG1ar2HI')"></div>
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Solution: Tech-Forward Living -->
+<section class="py-xxl bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="text-center mb-xxl">
+<span class="text-primary font-bold tracking-widest text-label-md uppercase">The Innovation</span>
+<h2 class="text-headline-lg font-headline-lg text-[#0f172a] mt-sm">DormHub: Where Tech Meets Comfort</h2>
+</div>
+<div class="bento-grid">
+<!-- Feature 1: AI Match -->
+<div class="col-span-12 md:col-span-8 glass-card p-xl rounded-2xl relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-base">Smart Companion Matching</h3>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-md">Our algorithm doesn't just find rooms; it finds roommates. We match you based on lifestyle, study habits, and interests to ensure your home environment is a sanctuary.</p>
+<div class="mt-lg flex gap-base">
+<div class="px-md py-xs bg-primary/10 text-primary border border-primary/20 rounded-full text-label-sm font-semibold">AI-Powered</div>
+<div class="px-md py-xs bg-secondary/10 text-secondary border border-secondary/20 rounded-full text-label-sm font-semibold">Social Proof</div>
+</div>
+</div>
+<div class="absolute right-0 bottom-0 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[140px] text-primary" data-icon="cognition">cognition</span>
+</div>
+</div>
+<!-- Feature 2: VR Tours -->
+<div class="col-span-12 md:col-span-4 bg-white p-xl rounded-2xl border border-outline-variant shadow-sm flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-primary text-4xl mb-lg" data-icon="view_in_ar">view_in_ar</span>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-base">Immersive VR Tours</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Walk through your potential room from anywhere in the world. High-fidelity renders that represent exactly what you get.</p>
+</div>
+<a class="text-primary font-bold inline-flex items-center gap-xs mt-lg hover:gap-base transition-all" href="#">Explore VR <span class="material-symbols-outlined">arrow_forward</span></a>
+</div>
+<!-- Feature 3: Verified -->
+<div class="col-span-12 md:col-span-4 bg-primary text-on-primary p-xl rounded-2xl flex flex-col items-center text-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white text-5xl mb-base" data-icon="verified_user">verified_user</span>
+<h3 class="text-headline-md font-headline-md mb-base">100% Verified</h3>
+<p class="text-label-md font-label-md text-white/90">Every listing on DormHub undergoes a 20-point physical inspection before it goes live.</p>
+</div>
+<!-- Feature 4: Community -->
+<div class="col-span-12 md:col-span-8 bg-white p-xl rounded-2xl border border-outline-variant shadow-sm overflow-hidden relative group">
+<div class="flex flex-col md:flex-row gap-xl items-center h-full">
+<div class="w-full md:w-1/2">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-base">Built-in Community Hub</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Access exclusive events, study groups, and local perks through the DormHub app. You're not just renting a bed; you're joining a tribe.</p>
+</div>
+<div class="w-full md:w-1/2 relative h-48 md:h-full">
+<div class="w-full h-full bg-cover bg-center rounded-xl" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhkBe0_PKg3bHhT4IpfZhyP9d-7wQeHq_XLyjzo9jEH603xOa4LNLepAkGFbQ5gNdTbCcWXRADpvv7NvW4WKBtY6x2aY9gXMk33H_1gA2QWp1VS-kmizCcRh8L6eZqVDNshPLkWLnhx6yz6K8kjEO9UTcOwVDnCfFH9b-0jBh30NFdfrMWcsoal1ec7d5EhYhSo0RdCgCQTBIwzT4d1q4A2oFXX8Z1L8mOC9OljlDW5R6p5fQ4k9otLRVmrvDxDjEgLtnUhq9rKsM')"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Vision -->
+<section class="py-xxl max-w-container-max mx-auto px-margin-desktop bg-white">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xxl items-center">
+<div class="order-2 md:order-1">
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700"></div>
+<div class="w-full aspect-[4/5] bg-cover bg-center rounded-2xl relative z-10 border border-outline-variant shadow-2xl" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDAg91BpIukhrNlikqeloTiCx98LD1JC0zK4_Wkhy_7JIB3ccu6qNH7h2ExByDfeIGx8od5-zh5ipw3eCWhT3c1PsNtjQy8r4NCugALj9Wye889gmQ2aG1Sd-xpZ_NRWrQJZUI8P7WGKIA-spbJ9O6CoSksznxdpdEHESzxvgd4mzTLlzCaO5Z9ZosDCcj_qXEmQwuSjxFpFfktmnK8mTvayoRGpHR74sV9BWpcQvNlIyk5ofuqnue93zQ7bOqxMvD_-YVkM9w0g_s')"></div>
+</div>
+</div>
+<div class="order-1 md:order-2 space-y-lg">
+<span class="text-primary font-bold tracking-widest text-label-md uppercase">Our Vision</span>
+<h2 class="text-headline-xl font-headline-xl text-on-surface">Redefining the Student Journey</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Our goal isn't just to be the biggest student housing platform. It's to be the most trusted. We envision a world where every student, regardless of their background or destination, can find a safe, vibrant, and inspiring home within minutes.</p>
+<div class="space-y-md">
+<div class="flex items-start gap-lg">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="public">public</span>
+</div>
+<div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Global Reach</h4>
+<p class="text-body-md font-body-md text-on-surface-variant">Expanding to 100+ university hubs globally by 2026.</p>
+</div>
+</div>
+<div class="flex items-start gap-lg">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="eco">eco</span>
+</div>
+<div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface font-semibold">Sustainable Living</h4>
+<p class="text-body-md font-body-md text-on-surface-variant">Prioritizing eco-certified properties and reducing our digital footprint.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-xxl">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="bg-primary rounded-3xl p-xxl relative overflow-hidden text-center shadow-2xl">
+<div class="relative z-10">
+<h2 class="text-headline-xl font-headline-xl text-white mb-lg">Ready to find your place?</h2>
+<p class="text-body-lg font-body-lg text-white/80 max-w-2xl mx-auto mb-xxl">Join thousands of students who have already found their home through DormHub. Your next chapter starts here.</p>
+<div class="flex flex-wrap justify-center gap-lg">
+<button class="bg-white text-primary px-xxl py-4 rounded-xl font-headline-md hover:bg-surface-container-low transition-all active:scale-95 shadow-xl">Get Started Now</button>
+<button class="bg-transparent border-2 border-white text-white px-xxl py-4 rounded-xl font-headline-md hover:bg-white/10 transition-all active:scale-95">Contact Support</button>
+</div>
+</div>
+<!-- Decorative Background Elements -->
+<div class="absolute -right-24 -bottom-24 w-96 h-96 bg-secondary/20 rounded-full blur-[100px]"></div>
+<div class="absolute -left-24 -top-24 w-96 h-96 bg-white/10 rounded-full blur-[100px]"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-xxl bg-surface-container-low border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl max-w-container-max mx-auto px-margin-desktop py-xxl">
+<div class="space-y-lg">
+<div class="text-headline-md font-headline-md font-bold text-primary">DormHub</div>
+<p class="text-on-surface-variant text-label-md">Elevating the student living experience through community and technology.</p>
+<div class="flex gap-lg">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="language">language</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="share">share</span>
+</div>
+</div>
+<div>
+<h4 class="text-on-surface font-bold mb-lg">Quick Links</h4>
+<ul class="space-y-sm">
+<li><a class="text-on-surface-variant text-label-sm hover:text-primary transition-colors" href="#">University Partners</a></li>
+<li><a class="text-on-surface-variant text-label-sm hover:text-primary transition-colors" href="#">List Your Property</a></li>
+<li><a class="text-on-surface-variant text-label-sm hover:text-primary transition-colors" href="#">Student Resources</a></li>
+<li><a class="text-on-surface-variant text-label-sm hover:text-primary transition-colors" href="#">DormHub Blog</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-on-surface font-bold mb-lg">Support</h4>
+<ul class="space-y-sm">
+<li><a class="text-on-surface-variant text-label-sm hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant text-label-sm hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="text-on-surface-variant text-label-sm hover:text-primary transition-colors" href="#">Contact Us</a></li>
+<li><a class="text-on-surface-variant text-label-sm hover:text-primary transition-colors" href="#">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-on-surface font-bold mb-lg">Newsletter Signup</h4>
+<p class="text-on-surface-variant text-label-sm mb-lg">Get the latest housing updates and student deals.</p>
+<div class="flex">
+<input class="bg-white border border-outline-variant rounded-l-lg w-full px-4 text-on-surface placeholder-outline focus:ring-2 focus:ring-primary outline-none" placeholder="Email address" type="email"/>
+<button class="bg-primary text-white px-lg rounded-r-lg font-bold hover:brightness-110">Join</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop py-lg border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-lg">
+<p class="text-label-sm font-label-sm text-on-surface-variant">© 2024 DormHub Inc. All rights reserved.</p>
+<div class="flex gap-xl text-on-surface-variant text-label-sm">
+<span>Engaging Students Globally</span>
+<span class="flex items-center gap-xs">Made with <span class="material-symbols-outlined text-sm text-error" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> in London</span>
+</div>
+</div>
+</footer>
+<script>
+    // Simple parallax and hover effects
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const heroImage = document.querySelector('section div[style*="background-image"]');
+        if(heroImage) {
+            heroImage.style.transform = `translateY(${scrolled * 0.1}px) scale(1.05)`;
+        }
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+                entry.target.classList.remove('opacity-0', 'translate-y-10');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+        observer.observe(section);
+    });
+</script>
+</body></html>
