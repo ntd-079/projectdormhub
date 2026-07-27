@@ -27,6 +27,15 @@ docker compose up --build
 - Backend health check: http://localhost:4000/api/health
 - Messages จาก SQLite: http://localhost:4000/api/messages
 
+เมื่อ Backend เริ่มทำงาน จะสร้างไฟล์ `database/data/app.sqlite` อัตโนมัติจาก [database/schema.sql](/C:/work/ปี%203/Sofwere%20Dev/projectdormhub/database/schema.sql) และเติมข้อมูลตัวอย่างจาก [database/seed.sql](/C:/work/ปี%203/Sofwere%20Dev/projectdormhub/database/seed.sql)
+
+หากมีคำสั่ง `sqlite3` สามารถสร้างฐานข้อมูลเองได้ด้วย:
+
+```bash
+sqlite3 database/data/app.sqlite < database/schema.sql
+sqlite3 database/data/app.sqlite < database/seed.sql
+```
+
 ## เริ่มต้นแบบไม่ใช้ Docker
 
 ต้องมี Node.js 20 ขึ้นไป จากนั้นเปิด terminal สองหน้าต่าง:
