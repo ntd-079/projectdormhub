@@ -1,20 +1,19 @@
-# Template เท่านั้น: ต้องปรับคำสั่ง build, start และ port หลังเลือก Stack
 services:
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "${FRONTEND_PORT:-3000}:3000"
-    depends_on:
-      - backend
-
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    build: ./backend
     ports:
       - "${BACKEND_PORT:-4000}:4000"
+    environment:
+      PORT: 4000
+      DATABASE_PATH: /app/database/data/app.sqlite
     volumes:
-      - ./database/data:/app/database/data
+      - ./database:/app/database
 
+  frontend:
+    build: ./frontend
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    environment:
+      VITE_API_URL: http://localhost:${BACKEND_PORT:-4000}
+    depends_on:
+      - backend
