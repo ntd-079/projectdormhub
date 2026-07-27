@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en">
+<html class="light" lang="en" style="">
 
 <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>DormHub | Find Your Perfect Student Home</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
+    rel="stylesheet">
   <!-- Tailwind Config Verbatim -->
   <script id="tailwind-config">
     tailwind.config = {
@@ -83,14 +82,14 @@
             "headline-xl": ["Inter"]
           },
           "fontSize": {
-            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
-            "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "400"}],
-            "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "600"}],
-            "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
-            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-            "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400"}],
-            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-            "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "body-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "600" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
           }
         },
       },
@@ -133,8 +132,8 @@
 <body class="bg-background text-on-background">
   <!-- TopNavBar (Shared Component) -->
   <header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant/30">
-    <nav class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop py-4">
-      <div class="text-headline-md font-headline-md font-bold text-primary">
+    <nav class="flex justify-between items-center w-full px-4 sm:px-6 lg:px-8 py-4">
+      <div class="text-headline-md font-headline-md font-bold text-primary cursor-pointer hover:opacity-90 transition-opacity">
         DormHub
       </div>
       <div class="hidden md:flex items-center gap-lg">
@@ -150,7 +149,7 @@
         <div class="hidden lg:flex items-center bg-surface-container-high rounded-full px-4 py-2">
           <span class="material-symbols-outlined text-outline mr-2">search</span>
           <input class="bg-transparent border-none focus:ring-0 text-label-md w-32 placeholder:text-outline"
-            placeholder="Search..." type="text" />
+            placeholder="Search..." type="text">
         </div>
         <button
           class="bg-primary text-on-primary px-lg py-2 rounded-lg font-label-md active:scale-95 transition-transform duration-150 shadow-sm">
@@ -175,35 +174,64 @@
               high-quality housing across the city.
             </p>
           </div>
-          <!-- Smart Search -->
-          <div class="glass-card p-4 rounded-xl shadow-lg max-w-2xl mx-auto lg:mx-0">
-            <div class="flex flex-col md:flex-row gap-base">
-              <div
-                class="flex-1 relative flex items-center bg-surface-container rounded-lg px-4 py-3 border border-outline-variant/30">
-                <span class="material-symbols-outlined text-primary mr-3">apartment</span>
-                <input class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder:text-outline"
-                  placeholder="Dormitory name, university, or location" type="text" />
+          <!-- Single Unified White Box Search & Filter Container -->
+          <div class="bg-white p-4 md:p-5 rounded-2xl shadow-xl max-w-4xl w-full mx-auto lg:mx-0 border border-outline-variant/40 space-y-4">
+            
+            <!-- Filters Section (Inside the White Box Header) -->
+            <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 pb-3 border-b border-slate-100 overflow-x-auto custom-scrollbar">
+              <!-- Dormitory Type Filter -->
+              <div class="flex-1 min-w-[160px] flex items-center gap-1.5 px-3 h-10 bg-transparent rounded-xl border border-slate-200 text-label-sm hover:border-primary/50 transition-all group">
+                <span class="material-symbols-outlined text-primary text-lg group-hover:scale-110 transition-transform">home_work</span>
+                <select id="dorm-type-filter" class="bg-transparent border-none focus:ring-0 text-label-sm p-0 font-medium text-on-surface cursor-pointer outline-none w-full">
+                  <option value="all">Dormitory type</option>
+                  <option value="female">Female Only (หอพักหญิง)</option>
+                  <option value="male">Male Only (หอพักชาย)</option>
+                  <option value="coed">Co-ed / Mixed (หอพักรวม)</option>
+                </select>
               </div>
-              <button
-                class="bg-primary text-on-primary px-xxl py-3 rounded-lg font-headline-md hover:opacity-90 transition-all shadow-md active:scale-95">
-                Search
+
+              <!-- Room Type Filter -->
+              <div class="flex-1 min-w-[150px] flex items-center gap-1.5 px-3 h-10 bg-transparent rounded-xl border border-slate-200 text-label-sm hover:border-primary/50 transition-all group">
+                <span class="material-symbols-outlined text-primary text-lg group-hover:scale-110 transition-transform">bed</span>
+                <select id="room-type-filter" class="bg-transparent border-none focus:ring-0 text-label-sm p-0 font-medium text-on-surface cursor-pointer outline-none w-full">
+                  <option value="all">Room type</option>
+                  <option value="fan">Fan Room (ห้องพัดลม)</option>
+                  <option value="ac">AC Room (ห้องแอร์)</option>
+                </select>
+              </div>
+
+              <!-- Price Filter & Filter Icon -->
+              <div class="flex-1 min-w-[160px] flex items-center gap-2 shrink-0">
+                <div class="flex-1 flex items-center gap-1.5 px-3 h-10 bg-transparent rounded-xl border border-slate-200 text-label-sm hover:border-primary/50 transition-all group">
+                  <span class="material-symbols-outlined text-primary text-lg group-hover:scale-110 transition-transform">payments</span>
+                  <select id="price-filter" class="bg-transparent border-none focus:ring-0 text-label-sm p-0 font-medium text-on-surface cursor-pointer outline-none w-full">
+                    <option value="all">Price</option>
+                    <option value="under3000">Under ฿3,000</option>
+                    <option value="3000-5000">฿3,000 - ฿5,000</option>
+                    <option value="5000-8000">฿5,000 - ฿8,000</option>
+                    <option value="above8000">Above ฿8,000</option>
+                  </select>
+                </div>
+
+                <!-- Filter Box Icon -->
+                <button type="button" class="flex items-center justify-center w-10 h-10 bg-transparent hover:bg-slate-50/80 rounded-xl border border-slate-200 text-primary hover:border-primary/50 transition-all active:scale-95 shrink-0">
+                  <span class="material-symbols-outlined text-xl">tune</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Search Input & Button Row -->
+            <div class="flex flex-col sm:flex-row gap-base pt-1">
+              <div class="flex-1 relative flex items-center bg-slate-100/50 hover:bg-slate-100/80 backdrop-blur-sm rounded-xl px-4 py-3.5 border border-slate-200/70 focus-within:bg-white focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+                <span class="material-symbols-outlined text-primary mr-3 text-2xl">search</span>
+                <input id="search-input" class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder:text-outline outline-none text-on-surface"
+                  placeholder="Dormitory name, university, or location..." type="text" />
+              </div>
+              <button id="search-btn" class="bg-primary hover:bg-primary/90 text-on-primary px-xxl py-3.5 rounded-xl font-headline-md transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 shrink-0">
+                <span class="material-symbols-outlined text-xl">search</span>
+                <span>Search</span>
               </button>
             </div>
-          </div>
-          <!-- Filter Chips -->
-          <div class="flex flex-wrap gap-sm justify-center lg:justify-start">
-            <button
-              class="flex items-center gap-xs px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-label-md hover:bg-primary/20 transition-all">
-              <span class="material-symbols-outlined text-sm">near_me</span> Near University
-            </button>
-            <button
-              class="flex items-center gap-xs px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-label-md hover:bg-primary/20 transition-all">
-              <span class="material-symbols-outlined text-sm">payments</span> Under ฿5,000
-            </button>
-            <button
-              class="flex items-center gap-xs px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-label-md hover:bg-primary/20 transition-all">
-              <span class="material-symbols-outlined text-sm">female</span> Female Only
-            </button>
           </div>
         </div>
         <!-- 3D Building Illustration -->
@@ -211,192 +239,172 @@
           <div class="absolute -inset-4 bg-primary/10 blur-[100px] rounded-full"></div>
           <img alt="3D Building Illustration" class="relative z-10 w-full h-auto drop-shadow-xl animate-pulse"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ4aJ5Plo9WGTE5iLAs7AWelpf4s1TfPlBtaJvabFet_--Y0NId90ulYE3lIXzHeNIGr_YPjjyy31rgbX7ckGDJdVWCw-NwGY3OTJhDkaTiJx-cjOIVgC3nc334anuibspt-p1eMDVYiZJnv-x15pvPrGTwiiOYMwH9AMjD32WXCTN_60AjENlQh7e2zo_S0aHb354pSHk5fE2mHvjeLe8BufEyKwX1ROS0wMcs-HEI-ADtuccvHgqyj3_yABTG2UeknMxK9EedR8"
-            style="animation-duration: 8s" />
+            style="animation-duration: 8s">
         </div>
       </div>
-    </section>
-    <!-- Filters Strip -->
-    <section class="max-w-container-max mx-auto px-margin-desktop mb-xxl">
-      <div class="flex items-center gap-md py-lg border-b border-outline-variant/50 overflow-x-auto custom-scrollbar">
-        <span class="text-label-md font-bold uppercase tracking-widest text-outline shrink-0">Filter by:</span>
-        <button
-          class="flex items-center gap-sm px-4 py-2 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors border border-outline-variant/30 shrink-0">
-          <span class="material-symbols-outlined text-primary">sell</span> Price Range
-        </button>
-        <button
-          class="flex items-center gap-sm px-4 py-2 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors border border-outline-variant/30 shrink-0">
-          <span class="material-symbols-outlined text-primary">home_work</span> Property Type
-        </button>
-        <button
-          class="flex items-center gap-sm px-4 py-2 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors border border-outline-variant/30 shrink-0">
-          <span class="material-symbols-outlined text-primary">ac_unit</span> AC/Fan
-        </button>
-        <button
-          class="flex items-center gap-sm px-4 py-2 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors border border-outline-variant/30 shrink-0">
-          <span class="material-symbols-outlined text-primary">directions_walk</span> Distance
-        </button>
-      </div>
-    </section>
     <!-- Recommended Dormitories -->
-    <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-xxl">
-      <div class="flex justify-between items-end mb-xl">
-        <div>
-          <h2 class="text-headline-lg font-headline-lg text-on-surface">Recommended for You</h2>
-          <p class="text-body-md text-on-surface-variant">Top rated stays curated based on your preferences</p>
+    <section class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-20 md:mt-32 mb-xxl text-left">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-xl gap-4 text-left">
+        <div class="text-left ml-0">
+          <h2 class="text-headline-lg font-headline-lg text-on-surface text-left">Recommended for You</h2>
+          <p class="text-body-md text-on-surface-variant text-left">Top rated stays curated based on your preferences</p>
         </div>
-        <a class="text-primary font-bold text-label-md flex items-center hover:underline" href="#">
-          View All <span class="material-symbols-outlined ml-1">arrow_forward</span>
+        <a class="group text-primary hover:text-primary font-bold text-label-md flex items-center gap-2 px-4 py-2 rounded-full hover:bg-primary/10 border border-transparent hover:border-primary/20 transition-all duration-200 shrink-0 self-start sm:self-end active:scale-95 shadow-none hover:shadow-sm" href="explore.html">
+          <span class="group-hover:underline group-hover:tracking-wide transition-all duration-200">View All</span>
+          <span class="material-symbols-outlined text-xl group-hover:translate-x-2 group-hover:scale-110 transition-all duration-200">arrow_forward</span>
         </a>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full">
         <!-- Dorm Card 1 -->
-        <div
-          class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-outline-variant/30">
-          <div class="relative h-64 overflow-hidden">
-            <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+        <div data-dorm-card data-dorm-type="coed" data-room-type="ac" data-price="3000-5000" data-name="skyline residence" data-location="cu university"
+          class="w-full group bg-surface-container-lowest rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-3 hover:border-primary/50 transition-all duration-300 cursor-pointer border border-outline-variant/40">
+          <div class="relative h-64 md:h-72 overflow-hidden">
+            <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700 ease-out"
               data-alt="A modern dormitory room with minimalist furniture, a large window letting in natural light, and a clean workspace for students. The interior is styled with soft blues and neutral tones, creating a calm academic atmosphere. High-end architectural photography style."
               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCqLAWhx5oV2woLXs15oqUfCOKY33p7kVIN8jNJZXtyoBmVVPbCaCHLP5e1GBIwSN-bJ-DEb-Fo4G0uQwWk5Dts7O_wwv7lycLFQ10_CL37g-A0RIE_KWwZMWBpyV7SGNlQ5ajRyYayANYaWflCFpyMpvBs9IPLJghlOGt_EvjsB1G9qui95QPRdb-e_ti3FOXcjmKPpB-17aGOVpFCYA9OuFwnRQ_6RB0lv-crii2_2Xhjp7GZ5zIweRyp1nbrxwzHCizxb4xqeig')">
             </div>
+            <div class="absolute top-4 left-4 bg-emerald-600 text-white px-3.5 py-1 rounded-full text-body-sm font-bold shadow-md flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm">wc</span> Co-ed
+            </div>
             <div
-              class="absolute top-4 left-4 bg-primary text-on-primary px-3 py-1 rounded-full text-label-sm font-bold shadow-sm">
-              Recommended</div>
-            <div
-              class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg text-primary font-bold shadow-sm">
+              class="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-xl text-primary group-hover:bg-primary group-hover:text-white text-lg font-bold shadow-lg transition-colors duration-300">
               ฿4,500/mo</div>
           </div>
-          <div class="p-lg space-y-md">
+          <div class="p-6 space-y-3">
             <div>
-              <h3 class="text-headline-sm font-bold text-on-surface">Skyline Residence</h3>
-              <p class="text-label-sm text-on-surface-variant flex items-center gap-xs mt-1">
-                <span class="material-symbols-outlined text-sm text-primary">location_on</span> 500m from CU University
+              <h3 class="text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">Skyline Residence</h3>
+              <p class="text-body-md text-on-surface-variant flex items-center gap-1.5 mt-1 font-medium">
+                <span class="material-symbols-outlined text-base text-primary">location_on</span> 500m from CU University
               </p>
             </div>
-            <div class="flex gap-base">
+            <div class="flex gap-2 flex-wrap pt-1">
               <span
-                class="flex items-center gap-xs text-label-sm bg-surface-container px-2 py-1 rounded text-on-surface-variant"><span
-                  class="material-symbols-outlined text-xs">ac_unit</span> AC</span>
+                class="flex items-center gap-1.5 text-body-sm bg-surface-container px-3 py-1 rounded-lg font-medium text-on-surface-variant"><span
+                  class="material-symbols-outlined text-sm">ac_unit</span> AC</span>
               <span
-                class="flex items-center gap-xs text-label-sm bg-surface-container px-2 py-1 rounded text-on-surface-variant"><span
-                  class="material-symbols-outlined text-xs">wifi</span> Wifi</span>
+                class="flex items-center gap-1.5 text-body-sm bg-surface-container px-3 py-1 rounded-lg font-medium text-on-surface-variant"><span
+                  class="material-symbols-outlined text-sm">wifi</span> Wifi</span>
               <span
-                class="flex items-center gap-xs text-label-sm bg-surface-container px-2 py-1 rounded text-on-surface-variant"><span
-                  class="material-symbols-outlined text-xs">local_parking</span> Parking</span>
+                class="flex items-center gap-1.5 text-body-sm bg-surface-container px-3 py-1 rounded-lg font-medium text-on-surface-variant"><span
+                  class="material-symbols-outlined text-sm">local_parking</span> Parking</span>
             </div>
           </div>
         </div>
         <!-- Dorm Card 2 -->
-        <div
-          class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-outline-variant/30">
-          <div class="relative h-64 overflow-hidden">
-            <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+        <div data-dorm-card data-dorm-type="female" data-room-type="ac" data-price="5000-8000" data-name="the hive smart living" data-location="mu tech"
+          class="w-full group bg-surface-container-lowest rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-3 hover:border-primary/50 transition-all duration-300 cursor-pointer border border-outline-variant/40">
+          <div class="relative h-64 md:h-72 overflow-hidden">
+            <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700 ease-out"
               data-alt="A vibrant student dormitory common area with comfortable lounge chairs, a shared library, and modern light fixtures. The space is active and social, featuring a deep navy and cyan color palette consistent with a tech-forward SaaS brand. Sharp focus, cinematic lighting."
               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAelguuGUH09urkUq8I_JxgEB-tzkI9diNcE4C8Ex7j6Oc1UsLnlpYRUwAtETj7GdOdypXBN73yhRywwVXeE9d7_pH-ju2gLx1wJ-3VH8Z26xxYfb5-IqdQrIYT7K5CWoOd6BHrXJJq0BiOgPPhV_VQ9RYeIoPhpmlWu4huGCVzfZMKCWIbfuWFTt-TsG7VBkdZjdOpgyyu1liF8c7h7LzL1MpHE6AO_SzIik547hV5-Fn1NE72EbuC6Y-91k_K_yaMbWCf23zXiYE')">
             </div>
+            <div class="absolute top-4 left-4 bg-pink-600 text-white px-3.5 py-1 rounded-full text-body-sm font-bold shadow-md flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm">female</span> Female Only
+            </div>
             <div
-              class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg text-primary font-bold shadow-sm">
+              class="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-xl text-primary group-hover:bg-primary group-hover:text-white text-lg font-bold shadow-lg transition-colors duration-300">
               ฿5,200/mo</div>
           </div>
-          <div class="p-lg space-y-md">
+          <div class="p-6 space-y-3">
             <div>
-              <h3 class="text-headline-sm font-bold text-on-surface">The Hive Smart Living</h3>
-              <p class="text-label-sm text-on-surface-variant flex items-center gap-xs mt-1">
-                <span class="material-symbols-outlined text-sm text-primary">location_on</span> 200m from MU Tech
+              <h3 class="text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">The Hive Smart Living</h3>
+              <p class="text-body-md text-on-surface-variant flex items-center gap-1.5 mt-1 font-medium">
+                <span class="material-symbols-outlined text-base text-primary">location_on</span> 200m from MU Tech
               </p>
             </div>
-            <div class="flex gap-base">
+            <div class="flex gap-2 flex-wrap pt-1">
               <span
-                class="flex items-center gap-xs text-label-sm bg-surface-container px-2 py-1 rounded text-on-surface-variant"><span
-                  class="material-symbols-outlined text-xs">smart_toy</span> Smart Room</span>
+                class="flex items-center gap-1.5 text-body-sm bg-surface-container px-3 py-1 rounded-lg font-medium text-on-surface-variant"><span
+                  class="material-symbols-outlined text-sm">smart_toy</span> Smart Room</span>
               <span
-                class="flex items-center gap-xs text-label-sm bg-surface-container px-2 py-1 rounded text-on-surface-variant"><span
-                  class="material-symbols-outlined text-xs">fitness_center</span> Gym</span>
+                class="flex items-center gap-1.5 text-body-sm bg-surface-container px-3 py-1 rounded-lg font-medium text-on-surface-variant"><span
+                  class="material-symbols-outlined text-sm">fitness_center</span> Gym</span>
             </div>
           </div>
         </div>
         <!-- Dorm Card 3 -->
-        <div
-          class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-outline-variant/30">
-          <div class="relative h-64 overflow-hidden">
-            <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+        <div data-dorm-card data-dorm-type="male" data-room-type="fan" data-price="3000-5000" data-name="green garden suites" data-location="ku center"
+          class="w-full group bg-surface-container-lowest rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-3 hover:border-primary/50 transition-all duration-300 cursor-pointer border border-outline-variant/40">
+          <div class="relative h-64 md:h-72 overflow-hidden">
+            <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700 ease-out"
               data-alt="A sleek, modern dormitory facade at night, illuminated by soft cyan led lights. The architecture is contemporary with glass balconies and greenery. High-contrast urban photography with a premium feel."
               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxRQJqsmilJ-NVzt6Me4BE_wiOMoDLnKeM2IcTgiPW3fCfeqEZj6qOySeM62mqzQDy89jh1IQNaxuNiEpDruuL0uazrff7JJXbsiuc4SQx-FVvIEqeRbad6E0eAsrfkcfaEeJ92NcsSKa67SyhF7vHGrg0HxG45pFgX4V5Y-xIsHiAjeon0v6c0cgJ_FRQpgdChZcXm8NxsV5ZcMmKqYwDKe2koozIkF3tg7h0MEFxZ2ws8IfpUqyaYtw7JhWlRw2QliPp3oDfXfY')">
             </div>
+            <div class="absolute top-4 left-4 bg-indigo-600 text-white px-3.5 py-1 rounded-full text-body-sm font-bold shadow-md flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm">male</span> Male Only
+            </div>
             <div
-              class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg text-primary font-bold shadow-sm">
+              class="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-xl text-primary group-hover:bg-primary group-hover:text-white text-lg font-bold shadow-lg transition-colors duration-300">
               ฿3,800/mo</div>
           </div>
-          <div class="p-lg space-y-md">
+          <div class="p-6 space-y-3">
             <div>
-              <h3 class="text-headline-sm font-bold text-on-surface">Green Garden Suites</h3>
-              <p class="text-label-sm text-on-surface-variant flex items-center gap-xs mt-1">
-                <span class="material-symbols-outlined text-sm text-primary">location_on</span> 1.2km from KU Center
+              <h3 class="text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">Green Garden Suites</h3>
+              <p class="text-body-md text-on-surface-variant flex items-center gap-1.5 mt-1 font-medium">
+                <span class="material-symbols-outlined text-base text-primary">location_on</span> 1.2km from KU Center
               </p>
             </div>
-            <div class="flex gap-base">
-              <span
-                class="flex items-center gap-xs text-label-sm bg-surface-container px-2 py-1 rounded text-on-surface-variant"><span
-                  class="material-symbols-outlined text-xs">park</span> Garden</span>
-              <span
-                class="flex items-center gap-xs text-label-sm bg-surface-container px-2 py-1 rounded text-on-surface-variant"><span
-                  class="material-symbols-outlined text-xs">pool</span> Pool</span>
+            <div class="flex gap-2 flex-wrap pt-1">
+              <span class="flex items-center gap-1.5 text-body-sm bg-surface-container px-3 py-1 rounded-lg font-medium text-on-surface-variant"><span class="material-symbols-outlined text-sm">park</span> Garden</span>
+              <span class="flex items-center gap-1.5 text-body-sm bg-surface-container px-3 py-1 rounded-lg font-medium text-on-surface-variant"><span class="material-symbols-outlined text-sm">pool</span> Pool</span>
             </div>
           </div>
         </div>
       </div>
     </section>
     <!-- Popular Near Universities -->
-    <section class="bg-surface-container-low py-xxl mb-xxl">
-      <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-        <div class="flex flex-col md:flex-row gap-xl items-center">
-          <div class="flex-1 space-y-lg">
-            <h2 class="text-headline-lg font-headline-lg text-on-surface">Popular Near Universities</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+    <section class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-xxl">
+      <div class="bg-surface-container-low py-12 md:py-16 px-6 md:px-12 rounded-3xl shadow-sm border border-slate-200/60 w-full">
+        <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
+          <div class="flex-1 w-full space-y-6">
+            <h2 class="text-xl sm:text-2xl lg:text-[28px] font-bold text-on-surface whitespace-nowrap tracking-tight -mt-6 md:-mt-8">Popular Near KMITL-Chumphon</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 pt-2">
               <div
-                class="flex items-center gap-md p-md bg-surface-container-lowest rounded-xl hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer border border-outline-variant/30">
-                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
-                  <span class="material-symbols-outlined">school</span>
+                class="flex items-center gap-4 p-4 md:p-5 bg-surface-container-lowest rounded-2xl hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer border border-outline-variant/30">
+                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
+                  <span class="material-symbols-outlined text-2xl">school</span>
                 </div>
-                <div>
-                  <h4 class="font-bold text-on-surface">Chulalongkorn</h4>
-                  <p class="text-label-sm text-on-surface-variant">120+ Dorms Available</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-on-surface text-base md:text-lg truncate">Chulalongkorn</h4>
+                  <p class="text-body-sm text-on-surface-variant mt-0.5">120+ Dorms Available</p>
                 </div>
               </div>
               <div
-                class="flex items-center gap-md p-md bg-surface-container-lowest rounded-xl hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer border border-outline-variant/30">
-                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
-                  <span class="material-symbols-outlined">school</span>
+                class="flex items-center gap-4 p-4 md:p-5 bg-surface-container-lowest rounded-2xl hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer border border-outline-variant/30">
+                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
+                  <span class="material-symbols-outlined text-2xl">school</span>
                 </div>
-                <div>
-                  <h4 class="font-bold text-on-surface">Mahidol</h4>
-                  <p class="text-label-sm text-on-surface-variant">85+ Dorms Available</p>
-                </div>
-              </div>
-              <div
-                class="flex items-center gap-md p-md bg-surface-container-lowest rounded-xl hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer border border-outline-variant/30">
-                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
-                  <span class="material-symbols-outlined">school</span>
-                </div>
-                <div>
-                  <h4 class="font-bold text-on-surface">Kasetsart</h4>
-                  <p class="text-label-sm text-on-surface-variant">150+ Dorms Available</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-on-surface text-base md:text-lg truncate">Mahidol</h4>
+                  <p class="text-body-sm text-on-surface-variant mt-0.5">85+ Dorms Available</p>
                 </div>
               </div>
               <div
-                class="flex items-center gap-md p-md bg-surface-container-lowest rounded-xl hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer border border-outline-variant/30">
-                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
-                  <span class="material-symbols-outlined">school</span>
+                class="flex items-center gap-4 p-4 md:p-5 bg-surface-container-lowest rounded-2xl hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer border border-outline-variant/30">
+                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
+                  <span class="material-symbols-outlined text-2xl">school</span>
                 </div>
-                <div>
-                  <h4 class="font-bold text-on-surface">Thammasat</h4>
-                  <p class="text-label-sm text-on-surface-variant">94+ Dorms Available</p>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-on-surface text-base md:text-lg truncate">Kasetsart</h4>
+                  <p class="text-body-sm text-on-surface-variant mt-0.5">150+ Dorms Available</p>
+                </div>
+              </div>
+              <div
+                class="flex items-center gap-4 p-4 md:p-5 bg-surface-container-lowest rounded-2xl hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer border border-outline-variant/30">
+                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
+                  <span class="material-symbols-outlined text-2xl">school</span>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-bold text-on-surface text-base md:text-lg truncate">Thammasat</h4>
+                  <p class="text-body-sm text-on-surface-variant mt-0.5">94+ Dorms Available</p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="flex-1 relative">
+          <div class="flex-1 w-full relative">
             <div class="absolute -inset-4 bg-primary/5 blur-3xl rounded-full"></div>
             <div
-              class="relative rounded-2xl overflow-hidden shadow-xl border border-outline-variant/50 aspect-video md:aspect-square">
+              class="relative rounded-2xl overflow-hidden shadow-xl border border-outline-variant/50 aspect-video md:aspect-[4/3] w-full">
               <div class="w-full h-full bg-cover bg-center"
                 data-alt="A stylized digital map of a city showing university campus clusters and dormitory hotspots. The map is designed with a dark, navy aesthetic and cyan neon highlights for high-density areas. Minimalist UI elements overlay the map."
                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkstlXdR9y1atMbRKEdjYS3VBAfyYtyqi76kMoQQ9gkqLlujasQuOMIT3AiJVgE-2jcN_X1iPbGrfUd4hpxx1cq7a3wtc_ShokTdCdwC0x67Ev846sDY0MpGI8uzvCmHCVqoOWy1sYUG2eerbcdhDZnvI5IYxDd-yCTri_G5BM5JH_hr8mNiIsZ5-p2mGFf-JP12QU4x-mfvfKASIv2htDsXYuT85BUpaJCzwtP9nxBnEZIxdRh6eIWDaNpj-PBrNUTxVmU6KoIDg')">
@@ -475,23 +483,23 @@
       <div class="space-y-md">
         <h4 class="text-label-md font-bold text-primary uppercase">Quick Links</h4>
         <ul class="space-y-base">
-          <li><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">University
-              Partners</a></li>
-          <li><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Privacy
-              Policy</a></li>
-          <li><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Terms of
-              Service</a></li>
+          <li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md"
+              href="#">University Partners</a></li>
+          <li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md"
+              href="#">Privacy Policy</a></li>
+          <li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md"
+              href="#">Terms of Service</a></li>
         </ul>
       </div>
       <div class="space-y-md">
         <h4 class="text-label-md font-bold text-primary uppercase">Support</h4>
         <ul class="space-y-base">
-          <li><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Contact
-              Us</a></li>
-          <li><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Help
-              Center</a></li>
-          <li><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">FAQs</a>
-          </li>
+          <li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md"
+              href="#">Contact Us</a></li>
+          <li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md"
+              href="#">Help Center</a></li>
+          <li class=""><a class="text-on-surface-variant hover:text-primary transition-colors text-body-md"
+              href="#">FAQs</a></li>
         </ul>
       </div>
       <div class="space-y-md">
@@ -500,7 +508,7 @@
         <div class="flex gap-base mt-md">
           <input
             class="bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-2 flex-1 text-label-md focus:ring-2 focus:ring-primary text-on-surface placeholder:text-outline"
-            placeholder="Email address" type="email" />
+            placeholder="Email address" type="email">
           <button
             class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md hover:opacity-90 shadow-sm">Signup</button>
         </div>
@@ -518,6 +526,8 @@
       }
     });
   </script>
+
+
 </body>
 
 </html>
