@@ -4,11 +4,11 @@
 !.env.example
 
 # SQLite database files
-*.sqlite
-*.sqlite3
-*.db
-database/data/*
-!database/data/.gitkeep
+# *.sqlite
+# *.sqlite3
+# *.db
+# database/data/*
+# !database/data/.gitkeep
 
 # Dependencies
 node_modules/
