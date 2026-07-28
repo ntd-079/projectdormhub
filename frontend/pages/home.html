@@ -137,19 +137,19 @@
         DormHub
       </div>
       <div class="hidden md:flex items-center gap-2">
-        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-primary font-semibold bg-primary/10 shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="#">
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-primary font-semibold bg-primary/10 shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="home.html">
           <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-100 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
           <span class="relative z-10">Home</span>
         </a>
-        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="#">
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="explore.html">
           <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
           <span class="relative z-10">Explore</span>
         </a>
-        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="#">
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="search.html">
           <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
           <span class="relative z-10">Search</span>
         </a>
-        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="#">
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="about.html">
           <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
           <span class="relative z-10">About</span>
         </a>
@@ -525,40 +525,6 @@
       </div>
     </div>
   </footer>
-  <script>
-    // Simple scroll animation for header
-    window.addEventListener('scroll', () => {
-      const header = document.querySelector('header');
-      if (window.scrollY > 20) {
-        header.classList.add('shadow-md');
-      } else {
-        header.classList.remove('shadow-md');
-      }
-    });
-
-    // Active Nav Spotlight Link Persistent State Toggle
-    document.querySelectorAll('.nav-spotlight-item').forEach(link => {
-      link.addEventListener('click', (e) => {
-        document.querySelectorAll('.nav-spotlight-item').forEach(el => {
-          el.classList.remove('text-primary', 'font-semibold', 'bg-primary/10', 'shadow-[0_0_20px_rgba(55,85,195,0.35)]');
-          el.classList.add('text-on-surface-variant', 'font-medium');
-          const beam = el.querySelector('.spotlight-beam');
-          if (beam) {
-            beam.classList.remove('opacity-100');
-            beam.classList.add('opacity-0');
-          }
-        });
-        link.classList.remove('text-on-surface-variant', 'font-medium');
-        link.classList.add('text-primary', 'font-semibold', 'bg-primary/10', 'shadow-[0_0_20px_rgba(55,85,195,0.35)]');
-        const activeBeam = link.querySelector('.spotlight-beam');
-        if (activeBeam) {
-          activeBeam.classList.remove('opacity-0');
-          activeBeam.classList.add('opacity-100');
-        }
-      });
-    });
-  </script>
-
 
 </body>
 

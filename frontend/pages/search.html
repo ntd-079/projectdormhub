@@ -113,22 +113,42 @@
 </head>
 
 <body class="bg-background text-on-surface antialiased">
-  <!-- TopNavBar -->
-  <header class="fixed top-0 w-full z-50 bg-background border-b border-outline-variant">
-    <div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop py-4">
-      <div class="text-headline-md font-headline-md font-bold text-primary">DormHub</div>
-      <nav class="hidden md:flex items-center gap-xl">
-        <a class="text-on-surface font-medium hover:text-primary transition-colors duration-200" href="#">Home</a>
-        <a class="text-on-surface font-medium hover:text-primary transition-colors duration-200" href="#">Explore</a>
-        <a class="text-primary font-bold border-b-2 border-primary pb-1 active:scale-95 transition-transform duration-150"
-          href="#">Search</a>
-        <a class="text-on-surface font-medium hover:text-primary transition-colors duration-200" href="#">About</a>
-      </nav>
-      <div class="flex items-center gap-md">
-        <button
-          class="bg-primary text-on-primary px-lg py-2 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all active:scale-95">Login</button>
+  <!-- TopNavBar (Shared Component) -->
+  <header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant/30">
+    <nav class="flex justify-between items-center w-full px-4 sm:px-6 lg:px-8 py-4">
+      <div class="text-headline-md font-headline-md font-bold text-primary cursor-pointer hover:opacity-90 transition-opacity">
+        DormHub
       </div>
-    </div>
+      <div class="hidden md:flex items-center gap-2">
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="home.html">
+          <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+          <span class="relative z-10">Home</span>
+        </a>
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="explore.html">
+          <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+          <span class="relative z-10">Explore</span>
+        </a>
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-primary font-semibold bg-primary/10 shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="search.html">
+          <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-100 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+          <span class="relative z-10">Search</span>
+        </a>
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="about.html">
+          <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+          <span class="relative z-10">About</span>
+        </a>
+      </div>
+      <div class="flex items-center gap-md">
+        <div class="hidden lg:flex items-center bg-surface-container-high rounded-full px-4 py-2">
+          <span class="material-symbols-outlined text-outline mr-2">search</span>
+          <input class="bg-transparent border-none focus:ring-0 text-label-md w-32 placeholder:text-outline"
+            placeholder="Search..." type="text">
+        </div>
+        <button
+          class="bg-primary text-on-primary px-lg py-2 rounded-lg font-label-md active:scale-95 transition-transform duration-150 shadow-sm">
+          Login
+        </button>
+      </div>
+    </nav>
   </header>
   <main class="pt-xxl min-h-screen">
     <!-- Hero Search Section -->
@@ -360,14 +380,35 @@
       }
     });
 
-    // Hover animation logic for cards
-    const cards = document.querySelectorAll('.group');
-    cards.forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.style.borderColor = '#2563eb';
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.borderColor = '#eff4ff';
+    // Simple scroll animation for header
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (header && window.scrollY > 20) {
+        header.classList.add('shadow-md');
+      } else if (header) {
+        header.classList.remove('shadow-md');
+      }
+    });
+
+    // Active Nav Spotlight Link Persistent State Toggle
+    document.querySelectorAll('.nav-spotlight-item').forEach(link => {
+      link.addEventListener('click', (e) => {
+        document.querySelectorAll('.nav-spotlight-item').forEach(el => {
+          el.classList.remove('text-primary', 'font-semibold', 'bg-primary/10', 'shadow-[0_0_20px_rgba(55,85,195,0.35)]');
+          el.classList.add('text-on-surface-variant', 'font-medium');
+          const beam = el.querySelector('.spotlight-beam');
+          if (beam) {
+            beam.classList.remove('opacity-100');
+            beam.classList.add('opacity-0');
+          }
+        });
+        link.classList.remove('text-on-surface-variant', 'font-medium');
+        link.classList.add('text-primary', 'font-semibold', 'bg-primary/10', 'shadow-[0_0_20px_rgba(55,85,195,0.35)]');
+        const activeBeam = link.querySelector('.spotlight-beam');
+        if (activeBeam) {
+          activeBeam.classList.remove('opacity-0');
+          activeBeam.classList.add('opacity-100');
+        }
       });
     });
   </script>

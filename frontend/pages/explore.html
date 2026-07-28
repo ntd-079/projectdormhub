@@ -126,28 +126,43 @@
 </head>
 
 <body class="bg-background text-on-background font-body-md selection:bg-primary/20">
-  <!-- TopNavBar -->
-  <nav class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b border-outline-variant shadow-sm">
-    <div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop py-4">
-      <div class="text-headline-md font-headline-md font-bold text-primary">DormHub</div>
-      <div class="hidden md:flex items-center gap-xl">
-        <a class="text-on-surface font-medium hover:text-primary transition-colors duration-200" href="#">Home</a>
-        <a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Explore</a>
-        <a class="text-on-surface font-medium hover:text-primary transition-colors duration-200" href="#">Search</a>
-        <a class="text-on-surface font-medium hover:text-primary transition-colors duration-200" href="#">About</a>
+  <!-- TopNavBar (Shared Component) -->
+  <header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant/30">
+    <nav class="flex justify-between items-center w-full px-4 sm:px-6 lg:px-8 py-4">
+      <div class="text-headline-md font-headline-md font-bold text-primary cursor-pointer hover:opacity-90 transition-opacity">
+        DormHub
       </div>
-      <div class="flex items-center gap-lg">
-        <div class="relative hidden lg:block">
-          <input
-            class="bg-surface-container border border-outline-variant rounded-full px-lg py-2 text-label-md w-64 focus:ring-2 focus:ring-primary transition-all"
-            placeholder="Search campus or city..." type="text" />
-          <span class="material-symbols-outlined absolute right-3 top-2 text-outline">search</span>
+      <div class="hidden md:flex items-center gap-2">
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="home.html">
+          <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+          <span class="relative z-10">Home</span>
+        </a>
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-primary font-semibold bg-primary/10 shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="explore.html">
+          <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-100 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+          <span class="relative z-10">Explore</span>
+        </a>
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="search.html">
+          <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+          <span class="relative z-10">Search</span>
+        </a>
+        <a class="nav-spotlight-item relative group px-5 py-2 rounded-full text-on-surface-variant font-medium hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(55,85,195,0.35)] transition-all duration-300 ease-out active:scale-95 overflow-hidden" href="about.html">
+          <span class="spotlight-beam absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+          <span class="relative z-10">About</span>
+        </a>
+      </div>
+      <div class="flex items-center gap-md">
+        <div class="hidden lg:flex items-center bg-surface-container-high rounded-full px-4 py-2">
+          <span class="material-symbols-outlined text-outline mr-2">search</span>
+          <input class="bg-transparent border-none focus:ring-0 text-label-md w-32 placeholder:text-outline"
+            placeholder="Search..." type="text">
         </div>
         <button
-          class="bg-primary text-on-primary px-xl py-2 rounded-lg font-label-md hover:brightness-110 active:scale-95 transition-all">Login</button>
+          class="bg-primary text-on-primary px-lg py-2 rounded-lg font-label-md active:scale-95 transition-transform duration-150 shadow-sm">
+          Login
+        </button>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
   <main class="pt-24 flex max-w-container-max mx-auto">
     <!-- SideNavBar / Filters -->
     <aside
@@ -159,31 +174,38 @@
       <div class="flex flex-col gap-sm">
         <!-- Rent Range -->
         <div
-          class="flex items-center gap-base bg-secondary-container text-on-secondary-container rounded-lg p-3 border-l-4 border-secondary transition-all duration-200 ease-in-out cursor-pointer">
+          class="flex items-center gap-base bg-primary/10 text-primary rounded-lg p-3 border-l-4 border-primary transition-all duration-200 ease-in-out cursor-pointer font-semibold">
           <span class="material-symbols-outlined">payments</span>
           <span class="text-label-md font-label-md">Rent Range</span>
         </div>
-        <div class="px-md py-sm">
-          <input class="w-full h-1 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-secondary"
-            type="range" />
-          <div class="flex justify-between text-label-sm text-outline mt-xs">
-            <span>$200</span>
-            <span>$1500</span>
+        <div class="px-md py-sm relative">
+          <!-- Floating price tooltip above slider thumb -->
+          <div class="relative w-full h-6">
+            <div id="rent-tooltip" class="absolute top-0 -translate-x-1/2 bg-primary text-white text-[11px] font-bold px-2 py-0.5 rounded-md shadow-md pointer-events-none whitespace-nowrap z-10 flex flex-col items-center" style="left: 100%;">
+              <span id="rent-tooltip-text">5,000฿</span>
+              <span class="w-1.5 h-1.5 bg-primary rotate-45 -mt-0.5"></span>
+            </div>
+          </div>
+          <input id="rent-slider" class="w-full h-1 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-primary"
+            type="range" min="1000" max="5000" step="100" value="5000" />
+          <div class="flex justify-between text-label-sm text-outline mt-1 font-medium">
+            <span>1,000฿</span>
+            <span>5,000฿</span>
           </div>
         </div>
-        <!-- Property Type -->
+        <!-- Dormitory Type -->
         <div
           class="flex items-center gap-base text-on-surface-variant p-3 hover:bg-surface-variant/50 rounded-lg cursor-pointer transition-all duration-200">
-          <span class="material-symbols-outlined">apartment</span>
-          <span class="text-label-md font-label-md">Property Type</span>
+          <span class="material-symbols-outlined">home_work</span>
+          <span class="text-label-md font-label-md">Dormitory Type</span>
         </div>
-        <div class="px-md flex flex-wrap gap-xs py-xs">
-          <span
-            class="px-3 py-1 rounded-full bg-tertiary-container text-on-tertiary-container text-label-sm">Mixed</span>
-          <span
-            class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-label-sm">Female</span>
-          <span
-            class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-label-sm">Male</span>
+        <div class="px-md flex flex-wrap gap-1.5 py-xs">
+          <button type="button"
+            class="dorm-chip px-3.5 py-1 rounded-full text-label-sm font-medium transition-all duration-200 active:scale-95 bg-primary text-white shadow-sm ring-2 ring-primary/30 font-semibold">Mixed</button>
+          <button type="button"
+            class="dorm-chip px-3.5 py-1 rounded-full text-label-sm font-medium transition-all duration-200 active:scale-95 bg-surface-container-highest text-on-surface-variant hover:bg-primary/10 hover:text-primary border border-transparent hover:border-primary/20">Female</button>
+          <button type="button"
+            class="dorm-chip px-3.5 py-1 rounded-full text-label-sm font-medium transition-all duration-200 active:scale-95 bg-surface-container-highest text-on-surface-variant hover:bg-primary/10 hover:text-primary border border-transparent hover:border-primary/20">Male</button>
         </div>
         <!-- Room Features -->
         <div
@@ -192,43 +214,20 @@
           <span class="text-label-md font-label-md">Room Features</span>
         </div>
         <div class="px-md space-y-2 py-xs">
-          <label class="flex items-center gap-base text-label-md text-on-surface">
+          <label class="flex items-center gap-base text-label-md text-on-surface cursor-pointer">
             <input checked=""
-              class="rounded border-outline-variant bg-surface-container text-secondary focus:ring-secondary"
+              class="rounded border-outline-variant bg-surface-container text-primary focus:ring-primary"
               type="checkbox" />
             Air Conditioning
           </label>
-          <label class="flex items-center gap-base text-label-md text-on-surface">
-            <input class="rounded border-outline-variant bg-surface-container text-secondary focus:ring-secondary"
+          <label class="flex items-center gap-base text-label-md text-on-surface cursor-pointer">
+            <input class="rounded border-outline-variant bg-surface-container text-primary focus:ring-primary"
               type="checkbox" />
             Ceiling Fan
           </label>
-        </div>
-        <!-- Facilities -->
-        <div
-          class="flex items-center gap-base text-on-surface-variant p-3 hover:bg-surface-variant/50 rounded-lg cursor-pointer transition-all duration-200">
-          <span class="material-symbols-outlined">vaping_rooms</span>
-          <span class="text-label-md font-label-md">Facilities</span>
-        </div>
-        <div class="px-md grid grid-cols-2 gap-xs py-xs">
-          <button
-            class="text-label-sm p-2 rounded border border-outline-variant text-on-surface hover:border-secondary hover:text-secondary transition-colors">Wi-Fi</button>
-          <button
-            class="text-label-sm p-2 rounded border border-outline-variant text-on-surface hover:border-secondary hover:text-secondary transition-colors">Parking</button>
-          <button
-            class="text-label-sm p-2 rounded border border-outline-variant text-on-surface hover:border-secondary hover:text-secondary transition-colors">Laundry</button>
-          <button
-            class="text-label-sm p-2 rounded border border-outline-variant text-on-surface hover:border-secondary hover:text-secondary transition-colors">Gym</button>
-        </div>
-        <!-- Distance -->
-        <div
-          class="flex items-center gap-base text-on-surface-variant p-3 hover:bg-surface-variant/50 rounded-lg cursor-pointer transition-all duration-200">
-          <span class="material-symbols-outlined">distance</span>
-          <span class="text-label-md font-label-md">Distance</span>
-        </div>
       </div>
       <button
-        class="mt-xl w-full bg-secondary text-on-secondary py-3 rounded-lg font-bold hover:brightness-110 shadow-sm transition-all">
+        class="mt-xl w-full bg-primary text-on-primary py-3 rounded-lg font-bold hover:bg-primary/90 shadow-sm transition-all active:scale-95">
         Apply Filters
       </button>
     </aside>
@@ -485,13 +484,65 @@
   </footer>
   <!-- Interactive Search Micro-interaction script -->
   <script>
-    document.querySelectorAll('input[type="range"]').forEach(range => {
-      range.addEventListener('input', (e) => {
-        const val = e.target.value;
-        const parent = e.target.closest('.px-md');
-        const label = parent.querySelector('.flex.justify-between');
-        if (label) {
-          label.children[1].innerText = `$${Math.floor(val * 13 + 200)}`;
+    const rentSlider = document.getElementById('rent-slider');
+    const rentTooltip = document.getElementById('rent-tooltip');
+    const rentTooltipText = document.getElementById('rent-tooltip-text');
+
+    function updateRentTooltip() {
+      if (!rentSlider || !rentTooltip || !rentTooltipText) return;
+      const min = Number(rentSlider.min) || 1000;
+      const max = Number(rentSlider.max) || 5000;
+      const val = Number(rentSlider.value);
+      
+      const percent = ((val - min) / (max - min)) * 100;
+      rentTooltip.style.left = `${percent}%`;
+      rentTooltipText.innerText = `${val.toLocaleString()}฿`;
+    }
+
+    if (rentSlider) {
+      rentSlider.addEventListener('input', updateRentTooltip);
+      updateRentTooltip();
+    }
+
+    // Active Selection Toggle for Dormitory Type Chips (Mixed, Female, Male)
+    const dormChips = document.querySelectorAll('.dorm-chip');
+    dormChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        dormChips.forEach(c => {
+          c.className = "dorm-chip px-3.5 py-1 rounded-full text-label-sm font-medium transition-all duration-200 active:scale-95 bg-surface-container-highest text-on-surface-variant hover:bg-primary/10 hover:text-primary";
+        });
+        chip.className = "dorm-chip px-3.5 py-1 rounded-full text-label-sm font-medium transition-all duration-200 active:scale-95 bg-primary text-white shadow-sm ring-2 ring-primary/30 font-semibold";
+      });
+    });
+
+    // Simple scroll animation for header
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (header && window.scrollY > 20) {
+        header.classList.add('shadow-md');
+      } else if (header) {
+        header.classList.remove('shadow-md');
+      }
+    });
+
+    // Active Nav Spotlight Link Persistent State Toggle
+    document.querySelectorAll('.nav-spotlight-item').forEach(link => {
+      link.addEventListener('click', (e) => {
+        document.querySelectorAll('.nav-spotlight-item').forEach(el => {
+          el.classList.remove('text-primary', 'font-semibold', 'bg-primary/10', 'shadow-[0_0_20px_rgba(55,85,195,0.35)]');
+          el.classList.add('text-on-surface-variant', 'font-medium');
+          const beam = el.querySelector('.spotlight-beam');
+          if (beam) {
+            beam.classList.remove('opacity-100');
+            beam.classList.add('opacity-0');
+          }
+        });
+        link.classList.remove('text-on-surface-variant', 'font-medium');
+        link.classList.add('text-primary', 'font-semibold', 'bg-primary/10', 'shadow-[0_0_20px_rgba(55,85,195,0.35)]');
+        const activeBeam = link.querySelector('.spotlight-beam');
+        if (activeBeam) {
+          activeBeam.classList.remove('opacity-0');
+          activeBeam.classList.add('opacity-100');
         }
       });
     });
