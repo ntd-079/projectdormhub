@@ -264,7 +264,7 @@
           <span class="material-symbols-outlined text-xl group-hover:translate-x-2 group-hover:scale-110 transition-all duration-200">arrow_forward</span>
         </a>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full">
+      <div id="recommended-dorms-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full">
         <!-- Dorm Card 1 -->
         <div data-dorm-card data-dorm-type="coed" data-room-type="ac" data-price="3000-5000" data-name="skyline residence" data-location="cu university"
           class="w-full group bg-surface-container-lowest rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-3 hover:border-primary/50 transition-all duration-300 cursor-pointer border border-outline-variant/40">
@@ -526,6 +526,88 @@
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('recommended-dorms-container');
+      if (!container) return;
+
+      const API_URL = 'http://localhost:4000/api/dormitories/recommended';
+      const defaultImg = 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800&auto=format&fit=crop';
+
+      function getBadgeConfig(gender) {
+        if (gender === 'หอหญิง' || gender === 'female') {
+          return { bg: 'bg-pink-600', icon: 'female', label: 'หอหญิง' };
+        }
+        if (gender === 'หอชาย' || gender === 'male') {
+          return { bg: 'bg-indigo-600', icon: 'male', label: 'หอชาย' };
+        }
+        return { bg: 'bg-emerald-600', icon: 'wc', label: gender || 'หอรวม' };
+      }
+
+      function renderDormCards(dorms) {
+        if (!dorms || dorms.length === 0) return;
+        container.innerHTML = dorms.map(dorm => {
+          const badge = getBadgeConfig(dorm.gender_type);
+          const img = (dorm.image_url && dorm.image_url.trim() !== '') ? dorm.image_url : defaultImg;
+          const rent = Number(dorm.monthly_rent || 0).toLocaleString();
+
+          return `
+            <div data-dorm-card data-dorm-type="${dorm.gender_type || 'all'}" data-room-type="${dorm.room_type || 'ac'}"
+              class="w-full group bg-surface-container-lowest rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-3 hover:border-primary/50 transition-all duration-300 cursor-pointer border border-outline-variant/40">
+              <div class="relative h-64 md:h-72 overflow-hidden">
+                <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700 ease-out"
+                  style="background-image: url('${img}')">
+                </div>
+                <div class="absolute top-4 left-4 ${badge.bg} text-white px-3.5 py-1 rounded-full text-body-sm font-bold shadow-md flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-sm">${badge.icon}</span> ${badge.label}
+                </div>
+                <div class="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-xl text-primary group-hover:bg-primary group-hover:text-white text-lg font-bold shadow-lg transition-colors duration-300">
+                  ฿${rent}/เดือน
+                </div>
+              </div>
+              <div class="p-6 space-y-3">
+                <div>
+                  <h3 class="text-2xl font-bold text-on-surface group-hover:text-primary transition-colors">${dorm.name}</h3>
+                  <p class="text-body-md text-on-surface-variant flex items-center gap-1.5 mt-1 font-medium">
+                    <span class="material-symbols-outlined text-base text-primary">call</span> ${dorm.phone || 'N/A'}
+                  </p>
+                </div>
+                <div class="flex gap-2 flex-wrap pt-1">
+                  <span class="flex items-center gap-1.5 text-body-sm bg-surface-container px-3 py-1 rounded-lg font-medium text-on-surface-variant">
+                    <span class="material-symbols-outlined text-sm">${(dorm.room_type && dorm.room_type.includes('แอร์')) ? 'ac_unit' : 'mode_fan'}</span> ${dorm.room_type || 'ห้องแอร์'}
+                  </span>
+                  <span class="flex items-center gap-1.5 text-body-sm bg-surface-container px-3 py-1 rounded-lg font-medium text-on-surface-variant">
+                    <span class="material-symbols-outlined text-sm">water_drop</span> ค่าน้ำ ฿${dorm.water_fee}/ยูนิต
+                  </span>
+                  <span class="flex items-center gap-1.5 text-body-sm bg-surface-container px-3 py-1 rounded-lg font-medium text-on-surface-variant">
+                    <span class="material-symbols-outlined text-sm">bolt</span> ค่าไฟ ฿${dorm.electricity_fee}/ยูนิต
+                  </span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      async function fetchDorms() {
+        try {
+          let res = await fetch('http://localhost:5000/api/dormitories/recommended').catch(() => null);
+          if (!res || !res.ok) {
+            res = await fetch('http://localhost:4000/api/dormitories/recommended').catch(() => null);
+          }
+          if (res && res.ok) {
+            const resData = await res.json();
+            const dorms = Array.isArray(resData) ? resData : (resData.data || []);
+            renderDormCards(dorms);
+          }
+        } catch (err) {
+          console.warn('Backend database API offline, keeping template cards:', err);
+        }
+      }
+
+      fetchDorms();
+    });
+  </script>
 </body>
 
 </html>

@@ -1,10 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getRecommendedDormitories, Dormitory } from '../services/dormService';
 
 export default function Home() {
   const [dormType, setDormType] = useState('all');
   const [roomType, setRoomType] = useState('all');
   const [price, setPrice] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Database state for Recommended Dormitories
+  const [recommendedDorms, setRecommendedDorms] = useState<Dormitory[]>([]);
+  const [loadingDorms, setLoadingDorms] = useState<boolean>(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    setLoadingDorms(true);
+
+    getRecommendedDormitories(6)
+      .then((data) => {
+        if (isMounted) {
+          setRecommendedDorms(data);
+          setLoadingDorms(false);
+        }
+      })
+      .catch((err) => {
+        console.error('Error fetching recommended dormitories:', err);
+        if (isMounted) {
+          setLoadingDorms(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const getGenderBadgeConfig = (gender: string) => {
+    if (gender === 'หอหญิง' || gender === 'female') {
+      return { bg: 'bg-pink-600', icon: 'female', label: 'หอหญิง' };
+    }
+    if (gender === 'หอชาย' || gender === 'male') {
+      return { bg: 'bg-indigo-600', icon: 'male', label: 'หอชาย' };
+    }
+    return { bg: 'bg-emerald-600', icon: 'wc', label: gender || 'หอรวม' };
+  };
 
   return (
     <div className="bg-background text-on-background min-h-screen">
@@ -156,114 +194,81 @@ export default function Home() {
               <h2 className="text-3xl font-bold text-slate-900">Recommended for You</h2>
               <p className="text-slate-600 mt-1">Top rated stays curated based on your preferences</p>
             </div>
-            <a className="group text-primary hover:text-primary font-bold text-sm flex items-center gap-2 px-4 py-2 rounded-full hover:bg-primary/10 border border-transparent hover:border-primary/20 transition-all duration-200" href="explore.html">
+            <a className="group text-primary hover:text-primary font-bold text-sm flex items-center gap-2 px-4 py-2 rounded-full hover:bg-primary/10 border border-transparent hover:border-primary/20 transition-all duration-200" href="/pages/explore.html">
               <span>View All</span>
               <span className="material-symbols-outlined text-xl group-hover:translate-x-2 transition-all">arrow_forward</span>
             </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {/* Dorm Card 1 */}
-            <div className="w-full group bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 hover:border-primary/50 transition-all duration-300 cursor-pointer border border-slate-200/80">
-              <div className="relative h-64 overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800&auto=format&fit=crop" 
-                  alt="Skyline Residence"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute top-4 left-4 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">wc</span> Co-ed
+            {loadingDorms ? (
+              /* Loading Skeletons */
+              [1, 2, 3].map((n) => (
+                <div key={n} className="w-full bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 p-4 animate-pulse space-y-4">
+                  <div className="h-64 bg-slate-200 rounded-xl w-full"></div>
+                  <div className="h-6 bg-slate-200 rounded w-3/4"></div>
+                  <div className="h-4 bg-slate-200 rounded w-1/2"></div>
+                  <div className="flex gap-2 pt-2">
+                    <div className="h-6 bg-slate-200 rounded-lg w-16"></div>
+                    <div className="h-6 bg-slate-200 rounded-lg w-20"></div>
+                  </div>
                 </div>
-                <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-xl text-primary group-hover:bg-primary group-hover:text-white text-lg font-bold shadow-lg transition-colors">
-                  ฿4,500/mo
-                </div>
-              </div>
-              <div className="p-6 space-y-3">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">Skyline Residence</h3>
-                  <p className="text-sm text-slate-500 flex items-center gap-1 mt-1 font-medium">
-                    <span className="material-symbols-outlined text-base text-primary">location_on</span> 500m from CU University
-                  </p>
-                </div>
-                <div className="flex gap-2 flex-wrap pt-1">
-                  <span className="flex items-center gap-1 text-xs bg-slate-100 px-3 py-1 rounded-lg font-medium text-slate-600">
-                    <span className="material-symbols-outlined text-sm">ac_unit</span> AC
-                  </span>
-                  <span className="flex items-center gap-1 text-xs bg-slate-100 px-3 py-1 rounded-lg font-medium text-slate-600">
-                    <span className="material-symbols-outlined text-sm">wifi</span> Wifi
-                  </span>
-                  <span className="flex items-center gap-1 text-xs bg-slate-100 px-3 py-1 rounded-lg font-medium text-slate-600">
-                    <span className="material-symbols-outlined text-sm">local_parking</span> Parking
-                  </span>
-                </div>
-              </div>
-            </div>
+              ))
+            ) : recommendedDorms.length > 0 ? (
+              /* Database Dormitory Cards */
+              recommendedDorms.map((dorm) => {
+                const badge = getGenderBadgeConfig(dorm.gender_type);
+                const defaultImg = 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800&auto=format&fit=crop';
+                const imgSrc = dorm.image_url && dorm.image_url.trim() !== '' ? dorm.image_url : defaultImg;
 
-            {/* Dorm Card 2 */}
-            <div className="w-full group bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 hover:border-primary/50 transition-all duration-300 cursor-pointer border border-slate-200/80">
-              <div className="relative h-64 overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=800&auto=format&fit=crop" 
-                  alt="The Hive Smart Living"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute top-4 left-4 bg-pink-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">female</span> Female Only
-                </div>
-                <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-xl text-primary group-hover:bg-primary group-hover:text-white text-lg font-bold shadow-lg transition-colors">
-                  ฿5,200/mo
-                </div>
+                return (
+                  <div key={dorm.id} className="w-full group bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 hover:border-primary/50 transition-all duration-300 cursor-pointer border border-slate-200/80">
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src={imgSrc} 
+                        alt={dorm.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = defaultImg;
+                        }}
+                      />
+                      <div className={`absolute top-4 left-4 ${badge.bg} text-white px-3 py-1 rounded-full text-xs font-bold shadow-md flex items-center gap-1`}>
+                        <span className="material-symbols-outlined text-sm">{badge.icon}</span> {badge.label}
+                      </div>
+                      <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-xl text-primary group-hover:bg-primary group-hover:text-white text-lg font-bold shadow-lg transition-colors">
+                        ฿{Number(dorm.monthly_rent).toLocaleString()}/เดือน
+                      </div>
+                    </div>
+                    <div className="p-6 space-y-3">
+                      <div>
+                        <h3 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">{dorm.name}</h3>
+                        <p className="text-sm text-slate-500 flex items-center gap-1 mt-1 font-medium">
+                          <span className="material-symbols-outlined text-base text-primary">call</span> {dorm.phone || 'N/A'}
+                        </p>
+                      </div>
+                      <div className="flex gap-2 flex-wrap pt-1">
+                        <span className="flex items-center gap-1 text-xs bg-slate-100 px-3 py-1 rounded-lg font-medium text-slate-600">
+                          <span className="material-symbols-outlined text-sm">
+                            {dorm.room_type && dorm.room_type.includes('แอร์') ? 'ac_unit' : 'mode_fan'}
+                          </span> 
+                          {dorm.room_type || 'ห้องแอร์'}
+                        </span>
+                        <span className="flex items-center gap-1 text-xs bg-slate-100 px-3 py-1 rounded-lg font-medium text-slate-600">
+                          <span className="material-symbols-outlined text-sm">water_drop</span> ค่าน้ำ ฿{dorm.water_fee}/ยูนิต
+                        </span>
+                        <span className="flex items-center gap-1 text-xs bg-slate-100 px-3 py-1 rounded-lg font-medium text-slate-600">
+                          <span className="material-symbols-outlined text-sm">bolt</span> ค่าไฟ ฿{dorm.electricity_fee}/ยูนิต
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="col-span-full text-center py-12 text-slate-500">
+                ไม่พบข้อมูลหอพักที่แนะนำ
               </div>
-              <div className="p-6 space-y-3">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">The Hive Smart Living</h3>
-                  <p className="text-sm text-slate-500 flex items-center gap-1 mt-1 font-medium">
-                    <span className="material-symbols-outlined text-base text-primary">location_on</span> 200m from MU Tech
-                  </p>
-                </div>
-                <div className="flex gap-2 flex-wrap pt-1">
-                  <span className="flex items-center gap-1 text-xs bg-slate-100 px-3 py-1 rounded-lg font-medium text-slate-600">
-                    <span className="material-symbols-outlined text-sm">smart_toy</span> Smart Room
-                  </span>
-                  <span className="flex items-center gap-1 text-xs bg-slate-100 px-3 py-1 rounded-lg font-medium text-slate-600">
-                    <span className="material-symbols-outlined text-sm">fitness_center</span> Gym
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Dorm Card 3 */}
-            <div className="w-full group bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 hover:border-primary/50 transition-all duration-300 cursor-pointer border border-slate-200/80">
-              <div className="relative h-64 overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop" 
-                  alt="Green Garden Suites"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute top-4 left-4 bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">male</span> Male Only
-                </div>
-                <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-xl text-primary group-hover:bg-primary group-hover:text-white text-lg font-bold shadow-lg transition-colors">
-                  ฿3,800/mo
-                </div>
-              </div>
-              <div className="p-6 space-y-3">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">Green Garden Suites</h3>
-                  <p className="text-sm text-slate-500 flex items-center gap-1 mt-1 font-medium">
-                    <span className="material-symbols-outlined text-base text-primary">location_on</span> 1.2km from KU Center
-                  </p>
-                </div>
-                <div className="flex gap-2 flex-wrap pt-1">
-                  <span className="flex items-center gap-1 text-xs bg-slate-100 px-3 py-1 rounded-lg font-medium text-slate-600">
-                    <span className="material-symbols-outlined text-sm">park</span> Garden
-                  </span>
-                  <span className="flex items-center gap-1 text-xs bg-slate-100 px-3 py-1 rounded-lg font-medium text-slate-600">
-                    <span className="material-symbols-outlined text-sm">pool</span> Pool
-                  </span>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </section>
 
