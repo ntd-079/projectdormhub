@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS dormitories (
   gender_type TEXT,
   room_type TEXT,
   image_url TEXT,
-  location_id INTEGER,
+  location_id INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS amenities (
@@ -19,18 +19,17 @@ CREATE TABLE IF NOT EXISTS amenities (
   name VARCHAR,
   slug VARCHAR,
   category VARCHAR,
-  icon VARCHAR,
+  icon VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS dormitory_amenities (
   dormitory_id INTEGER,
-  amenity_id INTEGER,
+  amenity_id INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS locations (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  map_url TEXT,
+  map_url TEXT
 );
-
 
 

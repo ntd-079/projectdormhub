@@ -34,7 +34,7 @@ INSERT INTO amenities (
   name,	
   slug,	
   category,	
-  icon,
+  icon
 ) VALUES
   ('Wi-Fi','wifi','common','wifi'),
   ('เครื่องซักผ้า','washing_machine','common','washing-machine'),
@@ -48,11 +48,11 @@ INSERT INTO amenities (
   ('โต๊ะ','desk','room','table-2'),
   ('เก้าอี้','chair','room','armchair'),
   ('กล้องวงจรปิด','cctv','security','cctv'),
-  ('อนุญาตให้เลี้ยงสัตว์', 'pets_allowed', 'policy', 'paw-print'),
+  ('อนุญาตให้เลี้ยงสัตว์', 'pets_allowed', 'policy', 'paw-print');
 
 INSERT INTO dormitory_amenities (	
   dormitory_id,
-  amenity_id,
+  amenity_id
 ) VALUES
   (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),
   (2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,8),(2,9),(2,10),(2,11),(2,12),

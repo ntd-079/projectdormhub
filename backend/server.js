@@ -1,13 +1,19 @@
 import cors from 'cors';
 import express from 'express';
 import sqlite3 from 'sqlite3';
-import { mkdirSync, readFileSync, existsSync } from 'node:fs';
+import { mkdirSync, readFileSync, existsSync, unlinkSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const databasePath = process.env.DATABASE_PATH || resolve(__dirname, '../database/data/app.sqlite');
 mkdirSync(dirname(databasePath), { recursive: true });
+
+// Start with a completely fresh database on every backend process start.
+for (const suffix of ['', '-wal', '-shm']) {
+  const filePath = `${databasePath}${suffix}`;
+  if (existsSync(filePath)) unlinkSync(filePath);
+}
 
 const db = new sqlite3.Database(databasePath);
 const app = express();
@@ -41,28 +47,12 @@ async function initializeDatabase() {
 
   const schema = readFileSync(schemaPath, 'utf8');
   await exec(schema);
-
-  const countResult = await all('SELECT COUNT(*) as count FROM dormitories');
-  if (countResult[0]?.count === 0) {
-    const seed = readFileSync(seedPath, 'utf8');
-    await exec(seed);
-  } else {
-    await exec(`
-      UPDATE dormitories SET image_url = CASE id
-        WHEN 1 THEN 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800&auto=format&fit=crop'
-        WHEN 2 THEN 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=800&auto=format&fit=crop'
-        WHEN 3 THEN 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop'
-        WHEN 4 THEN 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800&auto=format&fit=crop'
-        WHEN 5 THEN 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop'
-        WHEN 6 THEN 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800&auto=format&fit=crop'
-        WHEN 7 THEN 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=800&auto=format&fit=crop'
-        WHEN 8 THEN 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop'
-        WHEN 9 THEN 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop'
-        WHEN 10 THEN 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=800&auto=format&fit=crop'
-        ELSE 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=800&auto=format&fit=crop'
-      END WHERE image_url IS NULL;
-    `);
-  }
+  const seed = readFileSync(seedPath, 'utf8');
+  // Accept seed files with trailing commas in column lists and between statements.
+  const normalizedSeed = seed
+    .replace(/,\s*(?=\))/g, '')
+    .replace(/,\s*(?=\r?\n\s*INSERT INTO)/g, ';');
+  await exec(normalizedSeed);
 }
 
 app.get('/api/health', (_request, response) => {
